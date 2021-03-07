@@ -1,0 +1,22 @@
+1. 세팅 
+    npm i express cors dotenv hpp helmet
+    npm i mongoose moment
+    npm i @babel/cli @babel/core @babel/node @babel/preset-env babel-loader @babel/polyfill -D
+    npm i morgan nodemon -D
+
+2. server/ client 폴더 생성
+    server 폴더에 app.js, server.js 파일 생성
+
+3. server 설정
+    models폴더에 db 스키마 생성하기
+    .env에 몽고uri 설정
+    config폴더에 dotenv로 몽고uri연결
+    app.js에 mongoose로 db 연결하기 
+
+4. 라우터 설정
+    routes 폴더 (posts.js, user.js)
+    app.js에 router 연결
+
+5. 
+    npm i bcryptjs jsonwebtoken
+
