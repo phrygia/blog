@@ -8,7 +8,8 @@ const config = require('./config')
 
 //Routes 
 const postsRoutes = require('./routes/api/posts')
-
+const userRoutes = require('./routes/api/user')
+const authRoutes = require('./routes/api/auth')
 
 const app = express();
 const { MONGO_URI } = config
@@ -26,8 +27,6 @@ app.use(cors({
     credentials: true   //  cors설정은 브라우저 header에 추가 
 }))
 
-app.use(morgan('dev'))  
-
 app.use(express.json())
 
 mongoose.connect( MONGO_URI ,{
@@ -40,5 +39,7 @@ mongoose.connect( MONGO_URI ,{
 // use routes
 app.get('/')
 app.use('/api/post', postsRoutes)
+app.use('/api/user', userRoutes)
+app.use('/api/auth', authRoutes)
 
 module.exports = app;

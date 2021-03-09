@@ -1,4 +1,5 @@
 const express = require('express')
+const auth = require('../../middleware/auth')
 
 // Model 
 const Post = require('../../models/post')
@@ -13,7 +14,7 @@ router.get('/', async(req, res) => {
     res.json(postFindResult)
 })
 
-router.post('/', async(req, res, next) => {
+router.post('/', auth, async(req, res, next) => {
     try {
         console.log(req, '-> req')
         const { title, contents, fileUrl, creator } = req.body
