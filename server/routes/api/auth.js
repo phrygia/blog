@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const auth = require('../../middleware/auth')
 const config = require('../../config/index')
-const { JWT_SERECT } = config
+const { JWT_SECRET } = config
 
 // Model
 const User = require('../../models/user')
@@ -13,7 +13,9 @@ const router = express.Router()
 // @route       POST    api/auth
 // @desc        Auth    user
 // @access      Public
+
 router.post('/', (req, res) => {
+
     const { email, password } = req.body;
 
     // simple Validation
@@ -29,17 +31,25 @@ router.post('/', (req, res) => {
             // Validation password
             bcrypt.compare(password, user.password).then((isMatch) => {
                 if(!isMatch) return res.status(400).json({ msg: '비밀번호가 일치하지 않습니다' })
-                jwt.sign({ id: user.id }, JWT_SERECT, { expiresIn: '2 days'}, (err, token) => {
+                jwt.sign(
+                    { 
+                        id: user.id 
+                    }, 
+                    JWT_SECRET,
+                    { 
+                        expiresIn: '2 days'
+                    }, (err, token) => {
                     if(err) throw err;
-                    res.json({
-                        token,
-                        user: {
-                            id: user.id,
-                            name: user.name,
-                            email: user.email,
-                            role: user.role
+                        res.json({
+                            token,
+                            user: {
+                                id: user.id,
+                                name: user.name,
+                                email: user.email,
+                                role: user.role
+                            }
                         }
-                    })
+                    )
                 })
             })
         })
@@ -51,7 +61,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/user', auth, async(req, res) => {
     try {
-        const user = await (await User.findById(req.user.id)).isSelected('-password')
+        const user = await User.findById(req.user.id).select('-password')
         if(!user) throw Error('유저가 존재하지 않습니다')
         res.json(user)
     } catch(e) {

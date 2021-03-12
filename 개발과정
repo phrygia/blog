@@ -27,8 +27,15 @@
 
 1. 세팅
     npx create-react-app .
-    npm i redux react-redux redux-saga react-router-dom connected-react-router dotenv
+    npm i redux react-redux redux-saga react-router-dom connected-react-router dotenv styled-components axios
     npm i history@^4.7.2
+    npm install @material-ui/core @material-ui/lab @material-ui/icons
+    npm i node-sass sass-loader
     
-2. 
-`
+2. store 설정 - redux saga
+3. route
+
+
+
+
+https://material-ui.com/components/material-icons/

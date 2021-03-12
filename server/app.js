@@ -4,7 +4,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
-const config = require('./config')
+const config = require('./config/index')
 
 //Routes 
 const postsRoutes = require('./routes/api/posts')
@@ -33,6 +33,7 @@ mongoose.connect( MONGO_URI ,{
     useUnifiedTopology:true,
     useCreateIndex: true,
     useNewUrlParser: true,
+    useFindAndModify: false,
 }).then(() => console.log('MongoDB connection success...'))
 .catch((err) => console.log(err))
 
