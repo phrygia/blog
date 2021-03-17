@@ -7,7 +7,6 @@ import PostCardOne from '../../components/post/PostCardOne'
 
 function PostCarsList() {
   const { posts } = useSelector((state) => state.post)
-  // console.log(posts)
   const dispatch = useDispatch()
 
   useEffect(() => {

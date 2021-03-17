@@ -110,8 +110,8 @@ function Footer() {
         }
       })
     return () => {
-      window.removeEventListener('scroll')
-      window.removeEventListener('scrollTo')
+      goToTop && window.removeEventListener('scroll')
+      goToTop && window.removeEventListener('scrollTo')
     }
   }, [goToTop])
 

@@ -34,7 +34,7 @@ function Member() {
     <>
       {userRole === 'Admin' ? (
         <>
-          <Link to="post" className="buttn" onClick={addPostLink}>
+          <Link to="/post" className="buttn" onClick={addPostLink}>
             Add Post
           </Link>
         </>

@@ -1,9 +1,16 @@
-import { POSTS_LOADING_FAILURE, POSTS_LOADING_REQUEST, POSTS_LOADING_SUCCESS } from '../types'
+import {
+  POSTS_LOADING_FAILURE,
+  POSTS_LOADING_REQUEST,
+  POSTS_LOADING_SUCCESS,
+  POST_DETAIL_LOADING_FAILURE,
+  POST_DETAIL_LOADING_REQUEST,
+  POST_DETAIL_LOADING_SUCCESS,
+} from '../types'
 
 const initialState = {
   isAuthenticated: null,
   posts: [],
-  postDefault: '',
+  postDetail: '',
   postCount: '',
   loading: false,
   error: '',
@@ -31,6 +38,26 @@ const postReducer = function (state = initialState, action) {
     case POSTS_LOADING_FAILURE:
       return {
         ...state,
+        loading: false,
+      }
+    case POST_DETAIL_LOADING_REQUEST:
+      return {
+        ...state,
+        posts: [],
+        loading: true,
+      }
+    case POST_DETAIL_LOADING_SUCCESS:
+      return {
+        ...state,
+        postDetail: action.payload,
+        creatorId: action.payload.creator._id,
+        title: action.payload.title,
+        loading: false,
+      }
+    case POST_DETAIL_LOADING_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
         loading: false,
       }
     default:

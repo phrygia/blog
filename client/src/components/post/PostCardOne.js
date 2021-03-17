@@ -86,7 +86,7 @@ function PostCardOne({ posts }) {
                   <Link to={`/post/${_id}`}>
                     <span>{date.substring(0, 10)}</span>
                     <h1>{title}</h1>
-                    <p>{contents}</p>
+                    <p>{contents.replace(/[<][^>]*[>]/gi, '')}</p>
                   </Link>
                 </Li>
               )

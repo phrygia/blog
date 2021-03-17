@@ -173,7 +173,6 @@ const EditPasswordAPI = (payload) => {
 
 function* EditPassword(action) {
   try {
-    // console.log(action, "EditPassword");
     const result = yield call(EditPasswordAPI, action.payload)
     yield put({
       type: PASSWORD_EDIT_UPLOADING_SUCCESS,
