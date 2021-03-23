@@ -109,12 +109,17 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        errorMsg: '',
+        previousMatchMsg: '',
+        previousMsg: '',
+        successMsg: '',
       }
     case PASSWORD_EDIT_UPLOADING_SUCCESS:
+      console.log(action.payload)
       return {
         ...state,
         isLoading: false,
-        successMsg: action.payload.data.success_msg,
+        successMsg: action.payload.success_msg,
         errorMsg: '',
         previousMsg: '',
       }
@@ -123,8 +128,8 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         successMsg: '',
-        errorMsg: action.payload.fail_msg,
-        previousMatchMsg: action.payload.match_msg,
+        errorMsg: action.payload.data.fail_msg,
+        previousMatchMsg: action.payload.data.match_msg,
       }
     case CLEAR_ERROR_REQUEST:
       return {

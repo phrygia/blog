@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Member from './Member'
+import SearchInput from './search/SearchInput'
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -92,6 +93,7 @@ function Header() {
         <Link to="/" className="blog-title">
           Phrygia Devlog
         </Link>
+        <SearchInput />
         <nav>
           <Link to="">Posts</Link>
           <Link to="">Diary</Link>

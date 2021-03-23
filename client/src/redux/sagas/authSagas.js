@@ -122,7 +122,7 @@ function* watchclearError() {
 // User Loading
 
 const userLoadingAPI = (token) => {
-  // console.log('token : ', token)
+  console.log(token)
 
   const config = {
     headers: {
@@ -137,7 +137,7 @@ const userLoadingAPI = (token) => {
 
 function* userLoading(action) {
   try {
-    // console.log(action, "userLoading");
+    console.log(action, 'userLoading')
     const result = yield call(userLoadingAPI, action.payload)
     yield put({
       type: USER_LOADING_SUCCESS,
@@ -178,6 +178,7 @@ function* EditPassword(action) {
       type: PASSWORD_EDIT_UPLOADING_SUCCESS,
       payload: result.data,
     })
+    console.log(result)
   } catch (e) {
     yield put({
       type: PASSWORD_EDIT_UPLOADING_FAILURE,

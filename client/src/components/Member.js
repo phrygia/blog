@@ -6,7 +6,7 @@ import LoginModal from './auth/LoginModal'
 import RegisterModal from './auth/RegisterModal'
 
 function Member() {
-  const [isOpen, setIsOpen] = useState(false)
+  // const [isOpen, setIsOpen] = useState(false)
   const { isAuthenticated, user, userRole } = useSelector((state) => state.auth)
   // console.log(userRole, 'userRole')
 
@@ -18,9 +18,9 @@ function Member() {
     })
   }, [dispatch])
 
-  useEffect(() => {
-    setIsOpen(false)
-  }, [user])
+  // useEffect(() => {
+  //   setIsOpen(false)
+  // }, [user])
 
   // const handleOpen = () => {
   //     setIsOpen(!isOpen)
@@ -47,7 +47,7 @@ function Member() {
           user && user.name ? (
             <>
               {/* <Link to="/"></Link> */}
-              <span>{user ? `Welcome ${user.name}` : ''}</span>
+              <Link to={`/user/${user.name}/profile`}> {user ? `Welcome ${user.name}` : ''}</Link>
             </>
           ) : (
             // <button>

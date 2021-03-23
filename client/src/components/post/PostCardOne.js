@@ -72,17 +72,29 @@ const Li = styled.li`
   }
 `
 
-function PostCardOne({ posts }) {
-  // console.log(posts)
+function PostCardOne({ posts, result }) {
+  // result가 true면 최신정렬하기 위해 .slice(0).reverse() 사용한 배열로 return 되고 (검색, 카테고리 결과) 설정안되어있으면 (글 리스트) 그냥 최신순으로 노출됨 -> server에서 최신순으로 정렬했기때문에
   return (
     <ul>
       {Array.isArray(posts)
-        ? posts
-            .slice(0)
-            .reverse()
-            .map(({ _id, title, contents, date }) => {
+        ? result
+          ? posts
+              .slice(0)
+              .reverse()
+              .map(({ _id, title, contents, date }, index) => {
+                return (
+                  <Li key={_id + index}>
+                    <Link to={`/post/${_id}`}>
+                      <span>{date.substring(0, 10)}</span>
+                      <h1>{title}</h1>
+                      <p>{contents.replace(/[<][^>]*[>]/gi, '')}</p>
+                    </Link>
+                  </Li>
+                )
+              })
+          : posts.map(({ _id, title, contents, date }, index) => {
               return (
-                <Li key={_id + date}>
+                <Li key={_id + index}>
                   <Link to={`/post/${_id}`}>
                     <span>{date.substring(0, 10)}</span>
                     <h1>{title}</h1>

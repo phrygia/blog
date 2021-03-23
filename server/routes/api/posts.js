@@ -52,15 +52,24 @@ router.post('/image', uploadS3.array('upload', 5), async (req, res, next) => {
   }
 })
 
-// api/post
-router.get('/', async (req, res) => {
-  const postFindResult = await Post.find()
-  // console.log(postFindResult, 'All post get')
+// @route       Get api/post
+// @desc        More laading posts
+// @access      Public
+router.get('/skip/:skip', async (req, res) => {
+  try {
+    const postCount = await Post.countDocuments()
+    const postFindResult = await Post.find().skip(Number(req.params.skip)).limit(6).sort({ date: -1 }) //가장 최신
+    const categoryFindResult = await Category.find()
+    const result = { postFindResult, categoryFindResult, postCount }
 
-  res.json(postFindResult)
+    res.json(result)
+  } catch (e) {
+    console.log(e)
+    res.json({ msg: '더 이상 포스트가 없습니다.' })
+  }
 })
 
-// @route       POST api/post
+// @route       POST api/posta
 // @desc        Create a Post
 // @access      Private
 router.post('/', auth, uploadS3.none(), async (req, res, next) => {
@@ -72,11 +81,11 @@ router.post('/', auth, uploadS3.none(), async (req, res, next) => {
       contents,
       fileUrl,
       creator: req.user.id,
-      date: moment().format('YYYY-MM-DD hh:mm:ss'),
+      date: moment().format('YYYY.MM.DD hh:mm:ss'),
     })
 
     const findResult = await Category.findOne({
-      categoryName: category,
+      category_name: category,
     })
 
     console.log(findResult, 'FindResult!')
@@ -153,7 +162,7 @@ router.post('/:id/comments', async (req, res, nest) => {
     creator: req.body.userId,
     creator_name: req.body.userName,
     post: req.body.id,
-    date: moment().format('YYYY-MM-DD hh:mm:ss'),
+    date: moment().format('YYYY.MM.DD hh:mm:ss'),
   })
   try {
     await Post.findByIdAndUpdate(req.body.id, {
@@ -212,6 +221,7 @@ router.get('/:id/edit', async (req, res, next) => {
   }
 })
 
+// post
 router.post('/:id/edit', async (req, res, next) => {
   console.log(req, '/api/post/:id/deit')
   const {
@@ -225,7 +235,7 @@ router.post('/:id/edit', async (req, res, next) => {
         title,
         contents,
         fileUrl,
-        date: moment().format('YYYY-MM-DD hh:mm:ss'),
+        date: moment().format('YYYY.MM.DD hh:mm:ss'),
       },
       { new: true }
     )
@@ -236,4 +246,23 @@ router.post('/:id/edit', async (req, res, next) => {
     next(e)
   }
 })
+
+router.get('/category/:category_name', async (req, res, next) => {
+  try {
+    const result = await Category.findOne(
+      {
+        category_name: {
+          $regex: req.params.category_name,
+          $options: 'i',
+        },
+      },
+      'posts'
+    ).populate({ path: 'posts' })
+    res.send(result)
+  } catch (e) {
+    console.log(e)
+    next(e)
+  }
+})
+
 module.exports = router

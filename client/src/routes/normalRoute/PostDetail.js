@@ -32,14 +32,18 @@ function PostDetail(req) {
   }, [dispatch, req.match.params.id])
 
   const onDeleteClick = () => {
-    dispatch({
-      type: POST_DELETE_REQUEST,
-      payload: {
-        id: req.match.params.id,
-        token: localStorage.getItem('token'),
-      },
-    })
-    history.push('/')
+    const confirm_test = window.confirm('정말 삭제할래요?')
+
+    if (confirm_test) {
+      dispatch({
+        type: POST_DELETE_REQUEST,
+        payload: {
+          id: req.match.params.id,
+          token: localStorage.getItem('token'),
+        },
+      })
+      history.push('/')
+    } else return
   }
 
   const EditButton = (
@@ -84,9 +88,9 @@ function PostDetail(req) {
           <article className="post-comments">
             {Array.isArray(comments)
               ? comments.map(
-                  ({ contents, creator, date, _id, creator_name }) =>
+                  ({ contents, creator, date, _id, creator_name }, index) =>
                     date && (
-                      <div key={_id}>
+                      <div key={_id + index}>
                         {creator_name ? creator_name : creator}
                         {date.split(' ')[0]}
                         {date.split(' ')[1]}
