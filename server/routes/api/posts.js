@@ -1,6 +1,7 @@
 const express = require('express')
 const auth = require('../../middleware/auth')
 const moment = require('moment')
+require('@babel/polyfill')
 
 // Model
 const Post = require('../../models/post')
