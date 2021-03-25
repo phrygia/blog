@@ -20,7 +20,6 @@ router.get('/', async (req, res) => {
     if (!users) throw Error('No users')
     res.status(200).json(users)
   } catch (e) {
-    console.log(e)
     res.status(400).json({ msg: e.message })
   }
 })
@@ -31,8 +30,6 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { name, email, password } = req.body
-
-  console.log(req.body)
 
   //simple validation
   if (!name || !email || !password) {
@@ -104,7 +101,7 @@ router.post('/:userName/profile', auth, async (req, res) => {
       }
     })
   } catch (e) {
-    console.log('profile : ', e)
+    // console.log('profile : ', e)
   }
 })
 module.exports = router

@@ -12,10 +12,8 @@ router.get('/:search_result', async (req, res, next) => {
         $options: 'i',
       },
     })
-    console.log('search result : ', result)
     res.send(result)
   } catch (e) {
-    console.log(e)
     next(e)
   }
 })

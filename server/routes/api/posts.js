@@ -239,10 +239,8 @@ router.post('/:id/edit', async (req, res, next) => {
       },
       { new: true }
     )
-    console.log(modified_post, ': modified_post')
     res.redirect(`/api/post/${modified_post.id}`)
   } catch (e) {
-    console.log(e)
     next(e)
   }
 })
@@ -260,7 +258,6 @@ router.get('/category/:category_name', async (req, res, next) => {
     ).populate({ path: 'posts' })
     res.send(result)
   } catch (e) {
-    console.log(e)
     next(e)
   }
 })
