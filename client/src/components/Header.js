@@ -83,26 +83,14 @@ const HeaderInner = styled.section`
 `
 
 function Header() {
-  const portfolioAlert = () => {
-    return alert('준비중입니다 😉')
-  }
-
   return (
     <HeaderWrapper>
       <HeaderInner container alignItems="center">
         <Link to="/" className="blog-title">
-          Phrygia Devlog
+          phrygia react board
         </Link>
         <SearchInput />
         <nav>
-          <Link to="">Posts</Link>
-          <Link to="">Diary</Link>
-          <a href="https://www.notion.so/80b52376264e4ad98e08cde0c4b61a40" target="_blank" rel="noreferrer">
-            About
-          </a>
-          <a href="#none" onClick={portfolioAlert}>
-            Portfolio
-          </a>
           <Member />
         </nav>
       </HeaderInner>

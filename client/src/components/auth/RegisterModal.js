@@ -121,7 +121,7 @@ function RegisterModal() {
               type="password"
               name="password"
               onChange={onChange}
-              placeholder="비밀번호를 입력해주세요."
+              placeholder="비밀번호를 입력해주세요. (8자이상 영문,숫자,특수문자 중 2가지 이상을 혼합)"
               fullWidth
               InputLabelProps={{
                 shrink: true,
@@ -136,7 +136,8 @@ function RegisterModal() {
       </article>
     </section>
   )
-
+  // admin@test.com
+  // test!234
   return (
     <>
       <button onClick={handleOpen}>Register</button>

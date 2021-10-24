@@ -7,9 +7,13 @@ function SearchInput() {
   const [form, setForm] = useState({ searchBy: '' })
   const resetValue = useRef()
 
-  const onChange = (e) => {
+  const onClick = (e) => {
+    onChange()
+  }
+
+  const onChange = () => {
     setForm({
-      [e.target.name]: e.target.value,
+      [resetValue.current.name]: resetValue.current.value,
     })
   }
 
@@ -28,6 +32,7 @@ function SearchInput() {
     <>
       <form onSubmit={onSubmit} style={{ display: 'inline-block', marginLeft: '20px' }}>
         <input name="searchBy" onChange={onChange} ref={resetValue} />
+        <button onClick={onClick}>click</button>
       </form>
     </>
   )

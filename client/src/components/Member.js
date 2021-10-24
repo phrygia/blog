@@ -6,9 +6,7 @@ import LoginModal from './auth/LoginModal'
 import RegisterModal from './auth/RegisterModal'
 
 function Member() {
-  // const [isOpen, setIsOpen] = useState(false)
   const { isAuthenticated, user, userRole } = useSelector((state) => state.auth)
-  // console.log(userRole, 'userRole')
 
   const dispatch = useDispatch()
 
@@ -18,17 +16,7 @@ function Member() {
     })
   }, [dispatch])
 
-  // useEffect(() => {
-  //   setIsOpen(false)
-  // }, [user])
-
-  // const handleOpen = () => {
-  //     setIsOpen(!isOpen)
-  // }
-
   const addPostLink = () => {}
-
-  // console.log(useSelector(state => state.auth))
 
   const authLink = (
     <>

@@ -22,7 +22,6 @@ import {
 } from '../types'
 
 // Login
-
 const loginUserAPI = (loginData) => {
   console.log(loginData, 'loginData')
   const config = {
@@ -54,7 +53,6 @@ function* watchLoginUser() {
 }
 
 // LOGOUT
-
 function* logout(action) {
   try {
     yield put({
@@ -73,7 +71,6 @@ function* watchlogout() {
 }
 
 // Register
-
 const registerUserAPI = (req) => {
   console.log(req, 'req')
 
@@ -101,7 +98,6 @@ function* watchregisterUser() {
 }
 
 // clear Error
-
 function* clearError() {
   try {
     yield put({
@@ -120,7 +116,6 @@ function* watchclearError() {
 }
 
 // User Loading
-
 const userLoadingAPI = (token) => {
   console.log(token)
 
@@ -156,7 +151,6 @@ function* watchuserLoading() {
 }
 
 // Edit Password
-
 const EditPasswordAPI = (payload) => {
   const config = {
     headers: {
