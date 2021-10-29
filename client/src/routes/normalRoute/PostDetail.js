@@ -85,6 +85,7 @@ function PostDetail(req) {
           <article className="post-content">
             <CKEditor editor={BalloonEditor} data={postDetail.contents} config={editorConfiguration} disabled="true" />
           </article>
+          <span>{postDetail.views}</span>
           <article className="post-comments">
             {Array.isArray(comments)
               ? comments.map(

@@ -1,10 +1,11 @@
-import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Member from './Member'
 import SearchInput from './search/SearchInput'
 import { GitHub, Drafts, Home } from '@material-ui/icons'
 import bg from '../assets/img/bg.jpg'
+import profile from '../assets/img/cy.png'
 
 const HeaderWrapper = styled.header`
   width: 100%;
@@ -12,19 +13,21 @@ const HeaderWrapper = styled.header`
   background: url(${bg}) no-repeat fixed center 0/ 100% auto;
 
   @media ${(props) => props.theme.pc} {
-    height: 450px;
+    padding: 20px 0;
   }
   @media ${(props) => props.theme.mo} {
-    height: 300px;
+    /* height: 300px; */
   }
 `
 const HeaderInner = styled.section`
   margin: 0 auto;
   width: 100%;
+
   article {
+    position: relative;
     width: 100%;
     color: #fff;
-    &:not(:nth-child(2)) {
+    &:not(.he_text) {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
@@ -57,18 +60,35 @@ const HeaderInner = styled.section`
   @media ${(props) => props.theme.pc} {
     max-width: 1120px;
     padding: 0 4vw;
-    nav {
-      display: inline-block;
-      float: right;
-      text-align: right;
-      * {
-        height: 27px;
-        padding: 0 1.3rem 0 0;
-        font-size: 16px;
+    article {
+      &.he_text {
+        height: 340px;
+        text-align: center;
+        h1 {
+          span {
+            display: block;
+          }
+        }
       }
-    }
-    .blog-title {
-      font-size: 24px;
+      nav {
+        display: inline-block;
+        float: right;
+        text-align: right;
+        * {
+          height: 27px;
+          padding: 0 1.3rem 0 0;
+          font-size: 16px;
+        }
+      }
+      .blog-title {
+        font-size: 24px;
+      }
+      img {
+        position: absolute;
+        right: 0;
+        width: 140px;
+        margin-top: -30px;
+      }
     }
   }
 
@@ -76,27 +96,40 @@ const HeaderInner = styled.section`
     width: 90%;
     margin-bottom: 18px;
     text-align: center;
-    .blog-title {
-      font-size: 20px;
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 16px;
-      * {
-        margin: 0 10px;
-        font-size: 13px;
+    article {
+      .blog-title {
+        font-size: 20px;
       }
-      button:last-child,
-      span {
-        display: none;
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 16px;
+        * {
+          margin: 0 10px;
+          font-size: 13px;
+        }
+        button:last-child,
+        span {
+          display: none;
+        }
       }
     }
   }
 `
 
 function Header() {
+  const [postClass, setPostClass] = useState(true)
+  const history = useLocation()
+
+  useEffect(() => {
+    if (history.pathname.includes('/post')) {
+      setPostClass(false)
+    } else {
+      setPostClass(true)
+    }
+  }, [history])
+
   return (
     <HeaderWrapper>
       <HeaderInner container alignItems="center">
@@ -125,18 +158,21 @@ function Header() {
             </li>
           </ul>
         </article>
-        <article>
-          <h1>Ghost & Gatsby</h1>
-          <p>Thoughts, stories and JAMstack</p>
-        </article>
+        {postClass && (
+          <article className="he_text">
+            <h1>Ghost & Gatsby</h1>
+            <p>Thoughts, stories and JAMstack</p>
+          </article>
+        )}
         <article>
           <nav>
             <Member />
           </nav>
+          <img src={profile} alt="" />
         </article>
       </HeaderInner>
     </HeaderWrapper>
   )
 }
 
-export default withRouter(Header)
+export default Header

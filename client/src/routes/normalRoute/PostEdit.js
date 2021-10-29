@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor'
 import { editorConfiguration } from '../../components/editor/EditorConfig'
@@ -44,7 +44,7 @@ function PostEdit() {
   })
   const { postDetail } = useSelector((state) => state.post)
   const dispatch = useDispatch()
-  const history = useHistory();
+  const history = useHistory()
 
   const onChange = (e) => {
     setFormValue({
@@ -84,7 +84,7 @@ function PostEdit() {
       let whereImg_end = ''
       let ext_name_find = ''
       let result_img_url = ''
-      const ext_name = ['jpeg', 'jpg', 'png', 'gif']
+      const ext_name = ['jpeg', 'jpg', 'png']
 
       for (let i = 0; i < ext_name.length; i++) {
         if (data.match(ext_name[i])) {

@@ -30,7 +30,6 @@ function Router() {
     <>
       <Header />
       <PostContainer>
-        {/* <AdminInfo /> */}
         <Switch>
           <Route path="/" exact component={PostCarsList} />
           <Route path="/post" exact component={PostWrite} />

@@ -42,7 +42,6 @@ function PostCarsList() {
             skipNumberRef.current += 6
           } else {
             endMsg.current = true
-            // console.log(endMsg.current)
           }
         }
       }, options)
@@ -78,7 +77,7 @@ function PostCarsList() {
       <div ref={lastPostElementRef}>{loading && GrowingSpinner}</div>
       {loading ? null : endMsg ? (
         <div>
-          <Alert severity="error">게시글이 없습니다.</Alert>
+          <Alert severity="error">더 이상의 포스트는 없습니다</Alert>
         </div>
       ) : (
         ''

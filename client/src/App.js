@@ -11,7 +11,7 @@ const App = () => {
         <MyRouter />
       </ConnectedRouter>
     </Provider>
-  );
+  )
 }
 
-export default App;
+export default App

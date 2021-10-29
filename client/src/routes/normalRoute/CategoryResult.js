@@ -15,10 +15,11 @@ function CategoryResult() {
       payload: category_name,
     })
   }, [dispatch, category_name])
+
   return (
     <div>
       <h1>Category: {category_name}</h1>
-      {categoryFindResult && <PostCardOne posts={categoryFindResult.posts} result={true} />}
+      {categoryFindResult && <PostCardOne posts={categoryFindResult.posts} />}
     </div>
   )
 }

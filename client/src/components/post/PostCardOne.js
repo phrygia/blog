@@ -3,115 +3,80 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import noImg from '../../assets/img/noImg.jpg'
 
-const Li = styled.li`
-  border-bottom: 1px solid #e5e5e5;
-  span {
-    color: #aaa;
-  }
-  a:hover {
-    h1:after {
-      width: 5rem;
+const Ul = styled.ul`
+  li {
+    .post_card_image {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      overflow: hidden;
+    }
+    .post_card_excerpt {
+      color: #3c484e;
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
-  h1 {
-    position: relative;
-    line-height: 1.4;
-    word-break: break-all;
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0;
-      bottom: -5px;
-      -webkit-transition: all 0.3s ease-out;
-      transition: all 0.3s ease-out;
-      background-color: #121212;
-      height: 3px;
-      width: 2rem;
-    }
-  }
-  p {
-    white-space: normal;
-    line-height: 1.5;
-    max-height: 2.9em;
-    word-wrap: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    color: #7d7d7e;
-  }
-
   @media ${(props) => props.theme.pc} {
-    padding: 2.1rem 0;
-    span {
-      font-size: 15px;
-    }
-    h1 {
-      margin: 8px 0;
-      font-size: 25px;
-    }
-    p {
-      margin: 21px 0 0;
-      font-size: 16px;
+    max-width: 1120px;
+    padding: 0 4vw;
+    grid-gap: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    li {
+      .post_card_image {
+        height: 250px;
+      }
+      .post_card_title {
+        margin: 15px 0 10px;
+        font-size: 20px;
+        line-height: 1.15;
+      }
+      .post_card_excerpt {
+        margin-bottom: 10px;
+        font-size: 16px;
+        line-height: 1.4;
+      }
     }
   }
   @media ${(props) => props.theme.mo} {
-    padding: 1.5rem 0;
-    h1 {
-      margin: 7px 0;
-      font-size: 20px;
-      &:after {
-        height: 2px;
-        bottom: -4px;
-      }
-    }
-    p {
-      margin: 13px 0;
-      font-size: 14px;
-    }
   }
 `
 
-function PostCardOne({ posts, result }) {
-  const extension = '.jpg' || '.png' || 'gif'
-  // result가 true면 최신정렬하기 위해 .slice(0).reverse() 사용한 배열로 return 되고 (검색, 카테고리 결과)
-  // 설정안되어있으면 (글 리스트) 그냥 최신순으로 노출됨 -> server에서 최신순으로 정렬했기때문에
+function PostCardOne({ posts }) {
+  const extension = ['.jpeg', '.jpg', '.png']
   return (
-    <ul>
+    <Ul>
       {Array.isArray(posts)
-        ? result
-          ? posts
-              .slice(0)
-              .reverse()
-              .map(({ _id, title, fileUrl, contents, date }, index) => {
-                const imgUrl = fileUrl ? fileUrl.split(extension)[0] + extension : noImg
-                return (
-                  <Li key={_id + index}>
-                    <Link to={`/post/${_id}`}>
-                      <img src={imgUrl} alt="post_image" />
-                      <span>{date.substring(0, 10)}</span>
-                      <h1>{title}</h1>
-                      <p>{contents.replace(/[<][^>]*[>]/gi, '')}</p>
-                    </Link>
-                  </Li>
-                )
-              })
-          : posts.map(({ _id, title, fileUrl, contents, date }, index) => {
-              const imgUrl = fileUrl ? fileUrl.split(extension)[0] + extension : noImg
-              return (
-                <Li key={_id + index}>
-                  <Link to={`/post/${_id}`}>
-                    <img src={imgUrl} alt="post_image" />
-                    <span>{date.substring(0, 10)}</span>
-                    <h1>{title}</h1>
-                    <p>{contents.replace(/[<][^>]*[>]/gi, '')}</p>
-                  </Link>
-                </Li>
-              )
+        ? posts.map(({ _id, title, fileUrl, contents, category, date, views }, index) => {
+            const url = extension.find((val) => {
+              if (fileUrl.indexOf(val) !== -1) return val
             })
-        : null}
-    </ul>
+            const imgUrl = fileUrl ? fileUrl.split(url)[0] + url : noImg
+
+            return (
+              <li key={_id + index}>
+                <Link to={`/post/${_id}`}>
+                  <div className="post_card_image" style={{ backgroundImage: `url(${imgUrl})` }} />
+                  <h2 className="post_card_title">{title}</h2>
+                  <p className="post_card_excerpt">
+                    {contents.replace(/<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;|&gt;/g, ' ').substring(0, 200)}
+                  </p>
+                  <div className="post_card_footer">
+                    {/* <span>{category}</span> */}
+                    <span>{date.substring(0, 10)}</span>
+                    <span>{views}</span>
+                  </div>
+                </Link>
+              </li>
+            )
+          })
+        : ''}
+    </Ul>
   )
 }
 

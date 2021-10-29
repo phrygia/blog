@@ -72,7 +72,7 @@ function PostWrite() {
       let whereImg_end = ''
       let ext_name_find = ''
       let result_img_url = ''
-      const ext_name = ['jpeg', 'jpg', 'png', 'gif']
+      const ext_name = ['jpeg', 'jpg', 'png']
 
       for (let i = 0; i < ext_name.length; i++) {
         if (data.match(ext_name[i])) {
