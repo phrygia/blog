@@ -48,13 +48,13 @@ const Ul = styled.ul`
 `
 
 function PostCardOne({ posts }) {
-  const extension = ['.jpeg', '.jpg', '.png']
+  const extension = ['.jpeg', '.png', '.jpg']
   return (
     <Ul>
       {Array.isArray(posts)
         ? posts.map(({ _id, title, fileUrl, contents, category, date, views }, index) => {
             const url = extension.find((val) => {
-              if (fileUrl.indexOf(val) !== -1) return val
+              if (fileUrl.split('https://phrygiablog')[1].indexOf(val) !== -1) return val
             })
             const imgUrl = fileUrl ? fileUrl.split(url)[0] + url : noImg
 
