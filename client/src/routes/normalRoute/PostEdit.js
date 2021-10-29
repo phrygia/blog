@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from "react-router-dom";
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor'
 import { editorConfiguration } from '../../components/editor/EditorConfig'
@@ -42,8 +43,8 @@ function PostEdit() {
     category: '',
   })
   const { postDetail } = useSelector((state) => state.post)
-  //   console.log(postDetail)
   const dispatch = useDispatch()
+  const history = useHistory();
 
   const onChange = (e) => {
     setFormValue({
@@ -144,7 +145,8 @@ function PostEdit() {
               onReady={Myinit}
               onBlur={getDataFromChEditor}
             />
-            <Button type="submit">작성하기</Button>
+            <Button type="submit">수정하기</Button>
+            <Button onClick={() => history.goBack()}>취소하기</Button>
           </Form>
         </div>
       ) : (

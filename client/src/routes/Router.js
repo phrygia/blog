@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Container from '@material-ui/core/Container'
 import styled from 'styled-components'
-import AdminInfo from '../components/AdminInfo'
+// import AdminInfo from '../components/AdminInfo'
 import { Redirect, Route, Switch } from 'react-router'
 import PostCarsList from './normalRoute/PostCarsList'
 import PostWrite from './normalRoute/PostWrite'
@@ -30,7 +30,7 @@ function Router() {
     <>
       <Header />
       <PostContainer>
-        <AdminInfo />
+        {/* <AdminInfo /> */}
         <Switch>
           <Route path="/" exact component={PostCarsList} />
           <Route path="/post" exact component={PostWrite} />

@@ -1,48 +1,62 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Member from './Member'
 import SearchInput from './search/SearchInput'
+import { GitHub, Drafts, Home } from '@material-ui/icons'
+import bg from '../assets/img/bg.jpg'
 
 const HeaderWrapper = styled.header`
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 99;
   width: 100%;
   font-family: 'Lato', sans-serif;
-  border-bottom: 1px solid #f1f1f1;
-  background-color: #f8f8f8;
+  background: url(${bg}) no-repeat fixed center 0/ 100% auto;
+
+  @media ${(props) => props.theme.pc} {
+    height: 450px;
+  }
+  @media ${(props) => props.theme.mo} {
+    height: 300px;
+  }
 `
 const HeaderInner = styled.section`
-  margin: 1rem auto;
-  max-width: 1020px;
-  .blog-title {
-    color: #323232;
-    display: inline-block;
-    font-weight: 700;
-  }
-  nav {
-    button,
-    a {
-      font-family: 'Lato', sans-serif;
-      border: 0;
-      background-color: transparent;
-      outline: none;
-      float: left;
+  margin: 0 auto;
+  width: 100%;
+  article {
+    width: 100%;
+    color: #fff;
+    &:not(:nth-child(2)) {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    & > ul {
+      display: flex;
+    }
+    .blog-title {
       display: inline-block;
-      opacity: 0.6;
-      transition: all 0.2s ease-out;
-      &:hover {
-        opacity: 1;
+      font-weight: 700;
+    }
+    nav {
+      button,
+      a {
+        font-family: 'Lato', sans-serif;
+        border: 0;
+        background-color: transparent;
+        outline: none;
+        float: left;
+        display: inline-block;
+        opacity: 0.6;
+        transition: all 0.2s ease-out;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
   }
 
   @media ${(props) => props.theme.pc} {
-    width: 80% !important;
-    height: 30px;
-    line-height: 30px;
+    max-width: 1120px;
+    padding: 0 4vw;
     nav {
       display: inline-block;
       float: right;
@@ -86,16 +100,43 @@ function Header() {
   return (
     <HeaderWrapper>
       <HeaderInner container alignItems="center">
-        <Link to="/" className="blog-title">
-          phrygia react board
-        </Link>
-        <SearchInput />
-        <nav>
-          <Member />
-        </nav>
+        <article>
+          <Link to="/" className="blog-title">
+            phrygia react blog
+          </Link>
+          <ul>
+            <li>
+              <SearchInput />
+            </li>
+            <li>
+              <a href="https://github.com/phrygia" target="_blank" rel="noreferrer">
+                <GitHub />
+              </a>
+            </li>
+            <li>
+              <a href="mailto:dmsgp62@gmail.com">
+                <Drafts />
+              </a>
+            </li>
+            <li>
+              <Link to="/">
+                <Home />
+              </Link>
+            </li>
+          </ul>
+        </article>
+        <article>
+          <h1>Ghost & Gatsby</h1>
+          <p>Thoughts, stories and JAMstack</p>
+        </article>
+        <article>
+          <nav>
+            <Member />
+          </nav>
+        </article>
       </HeaderInner>
     </HeaderWrapper>
   )
 }
 
-export default Header
+export default withRouter(Header)

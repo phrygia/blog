@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import noImg from '../../assets/img/noImg.jpg'
 
 const Li = styled.li`
   border-bottom: 1px solid #e5e5e5;
@@ -73,7 +74,9 @@ const Li = styled.li`
 `
 
 function PostCardOne({ posts, result }) {
-  // result가 true면 최신정렬하기 위해 .slice(0).reverse() 사용한 배열로 return 되고 (검색, 카테고리 결과) 설정안되어있으면 (글 리스트) 그냥 최신순으로 노출됨 -> server에서 최신순으로 정렬했기때문에
+  const extension = '.jpg' || '.png' || 'gif'
+  // result가 true면 최신정렬하기 위해 .slice(0).reverse() 사용한 배열로 return 되고 (검색, 카테고리 결과)
+  // 설정안되어있으면 (글 리스트) 그냥 최신순으로 노출됨 -> server에서 최신순으로 정렬했기때문에
   return (
     <ul>
       {Array.isArray(posts)
@@ -81,10 +84,12 @@ function PostCardOne({ posts, result }) {
           ? posts
               .slice(0)
               .reverse()
-              .map(({ _id, title, contents, date }, index) => {
+              .map(({ _id, title, fileUrl, contents, date }, index) => {
+                const imgUrl = fileUrl ? fileUrl.split(extension)[0] + extension : noImg
                 return (
                   <Li key={_id + index}>
                     <Link to={`/post/${_id}`}>
+                      <img src={imgUrl} alt="post_image" />
                       <span>{date.substring(0, 10)}</span>
                       <h1>{title}</h1>
                       <p>{contents.replace(/[<][^>]*[>]/gi, '')}</p>
@@ -92,10 +97,12 @@ function PostCardOne({ posts, result }) {
                   </Li>
                 )
               })
-          : posts.map(({ _id, title, contents, date }, index) => {
+          : posts.map(({ _id, title, fileUrl, contents, date }, index) => {
+              const imgUrl = fileUrl ? fileUrl.split(extension)[0] + extension : noImg
               return (
                 <Li key={_id + index}>
                   <Link to={`/post/${_id}`}>
+                    <img src={imgUrl} alt="post_image" />
                     <span>{date.substring(0, 10)}</span>
                     <h1>{title}</h1>
                     <p>{contents.replace(/[<][^>]*[>]/gi, '')}</p>

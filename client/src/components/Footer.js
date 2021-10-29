@@ -1,7 +1,5 @@
-import React, { useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import { GitHub, Drafts, Home } from '@material-ui/icons'
 
 const FooterWrapper = styled.footer`
   clear: both;
@@ -99,14 +97,15 @@ const FooterInner = styled.section`
 function Footer() {
   const thisYser = new Date().getFullYear()
   const goToTop = useRef()
+  const [classSt, setClassSt] = useState('')
 
   useEffect(() => {
     goToTop &&
       window.addEventListener('scroll', function () {
         if (this.scrollY > 200) {
-          goToTop.current.classList.add('on')
+          setClassSt('on')
         } else {
-          goToTop.current.classList.remove('on')
+          setClassSt('')
         }
       })
     return () => {
@@ -122,26 +121,9 @@ function Footer() {
   return (
     <FooterWrapper>
       <FooterInner>
-        <ul>
-          <li>
-            <a href="https://github.com/phrygia" target="_blank" rel="noreferrer">
-              <GitHub />
-            </a>
-          </li>
-          <li>
-            <a href="mailto:dmsgp62@gmail.com">
-              <Drafts />
-            </a>
-          </li>
-          <li>
-            <Link to="/">
-              <Home />
-            </Link>
-          </li>
-        </ul>
         <p>&copy; {thisYser} phrygia. Made by phrygia with react.</p>
       </FooterInner>
-      <button id="go-to-top" ref={goToTop} onClick={goToTopBtn}>
+      <button id="go-to-top" className={`${classSt}`} ref={goToTop} onClick={goToTopBtn}>
         <span className="left" />
         <span className="right" />
         <p>Back To Top</p>

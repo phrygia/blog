@@ -17,7 +17,7 @@ const path = require('path')
 const AWS = require('aws-sdk')
 const dotenv = require('dotenv')
 const { isNullOrUndefined } = require('util')
-const { PresignedPost } = require('aws-sdk/clients/s3')
+// const { PresignedPost } = require('aws-sdk/clients/s3')
 dotenv.config()
 
 const s3 = new AWS.S3({

@@ -16,13 +16,13 @@ function Member() {
     })
   }, [dispatch])
 
-  const addPostLink = () => {}
+  // const addPostLink = () => {}
 
   const authLink = (
     <>
       {userRole === 'Admin' ? (
         <>
-          <Link to="/post" className="buttn" onClick={addPostLink}>
+          <Link to="/post" className="buttn">
             Add Post
           </Link>
         </>
@@ -34,7 +34,6 @@ function Member() {
         {
           user && user.name ? (
             <>
-              {/* <Link to="/"></Link> */}
               <Link to={`/user/${user.name}/profile`}> {user ? `Welcome ${user.name}` : ''}</Link>
             </>
           ) : (
@@ -54,7 +53,12 @@ function Member() {
     </>
   )
 
-  return <>{isAuthenticated ? <>{authLink}</> : <>{guestLink}</>}</>
+  return (
+    <>
+      <button>About</button>
+      {isAuthenticated ? <>{authLink}</> : <>{guestLink}</>}
+    </>
+  )
 }
 
 export default Member
