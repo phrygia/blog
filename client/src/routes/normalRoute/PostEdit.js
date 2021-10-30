@@ -66,6 +66,11 @@ function PostEdit() {
     })
   }
 
+  const cancel = (e) => {
+    e.preventDefault()
+    history.goBack()
+  }
+
   useEffect(() => {
     setFormValue({
       title: postDetail.title,
@@ -146,7 +151,9 @@ function PostEdit() {
               onBlur={getDataFromChEditor}
             />
             <Button type="submit">수정하기</Button>
-            <Button onClick={() => history.goBack()}>취소하기</Button>
+            <Button type="button" onClick={cancel}>
+              취소하기
+            </Button>
           </Form>
         </div>
       ) : (

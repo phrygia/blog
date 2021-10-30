@@ -31,17 +31,13 @@ function Member() {
       )}
       <>
         <button onClick={onLogout}>Logout</button>
-        {
-          user && user.name ? (
-            <>
-              <Link to={`/user/${user.name}/profile`}> {user ? `Welcome ${user.name}` : ''}</Link>
-            </>
-          ) : (
-            // <button>
-            <strong>No user</strong>
-          )
-          // </button>
-        }
+        {user && user.name ? (
+          <>
+            <Link to={`/user/${user.name}/profile`}> {user ? `Welcome ${user.name}` : ''}</Link>
+          </>
+        ) : (
+          <strong>No user</strong>
+        )}
       </>
     </>
   )
@@ -55,6 +51,7 @@ function Member() {
 
   return (
     <>
+      <Link to="/">Home</Link>
       <button>About</button>
       {isAuthenticated ? <>{authLink}</> : <>{guestLink}</>}
     </>

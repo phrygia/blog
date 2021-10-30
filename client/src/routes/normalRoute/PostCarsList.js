@@ -66,7 +66,7 @@ function PostCarsList() {
   const [lastPostElementRef] = useOnScreen({
     threshold: '0.5',
   })
-  // console.log(visible, 'visible', skipNumberRef.current, 'skipNum')
+  console.log(skipNumberRef.current, 'skipNum')
 
   return (
     <>

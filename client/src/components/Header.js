@@ -3,9 +3,10 @@ import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Member from './Member'
 import SearchInput from './search/SearchInput'
-import { GitHub, Drafts, Home } from '@material-ui/icons'
+import { GitHub, Drafts, Apps, Search } from '@material-ui/icons'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import bg from '../assets/img/bg.jpg'
-import profile from '../assets/img/cy.png'
+import profile from '../assets/img/cy2.png'
 
 const HeaderWrapper = styled.header`
   width: 100%;
@@ -13,7 +14,7 @@ const HeaderWrapper = styled.header`
   background: url(${bg}) no-repeat fixed center 0/ 100% auto;
 
   @media ${(props) => props.theme.pc} {
-    padding: 20px 0;
+    padding: 20px 0 30px;
   }
   @media ${(props) => props.theme.mo} {
     /* height: 300px; */
@@ -34,22 +35,43 @@ const HeaderInner = styled.section`
     }
     & > ul {
       display: flex;
+      li {
+        margin-left: 15px;
+        &.sch_box {
+          position: relative;
+          top: -2px;
+          display: flex;
+          .icon {
+            position: absolute;
+            left: 100%;
+            transition: all 0.2s ease;
+            z-index: 3;
+          }
+          &.on {
+            .icon {
+              right: auto;
+              left: 0;
+            }
+          }
+        }
+      }
     }
     .blog-title {
       display: inline-block;
       font-weight: 700;
     }
     nav {
+      display: flex;
       button,
       a {
         font-family: 'Lato', sans-serif;
         border: 0;
         background-color: transparent;
         outline: none;
-        float: left;
         display: inline-block;
         opacity: 0.6;
         transition: all 0.2s ease-out;
+        color: #fff;
         &:hover {
           opacity: 1;
         }
@@ -62,22 +84,17 @@ const HeaderInner = styled.section`
     padding: 0 4vw;
     article {
       &.he_text {
-        height: 340px;
+        height: 320px;
         text-align: center;
         h1 {
-          span {
-            display: block;
-          }
+          padding: 95px 0 5px;
+          font-size: 40px;
         }
-      }
-      nav {
-        display: inline-block;
-        float: right;
-        text-align: right;
-        * {
-          height: 27px;
-          padding: 0 1.3rem 0 0;
-          font-size: 16px;
+        p {
+          display: block;
+          font-size: 24px;
+          opacity: 0.7;
+          font-weight: 400;
         }
       }
       .blog-title {
@@ -86,8 +103,12 @@ const HeaderInner = styled.section`
       img {
         position: absolute;
         right: 0;
-        width: 140px;
         margin-top: -30px;
+      }
+      nav {
+        * {
+          margin-right: 20px;
+        }
       }
     }
   }
@@ -100,68 +121,58 @@ const HeaderInner = styled.section`
       .blog-title {
         font-size: 20px;
       }
-      nav {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 16px;
-        * {
-          margin: 0 10px;
-          font-size: 13px;
-        }
-        button:last-child,
-        span {
-          display: none;
-        }
-      }
     }
   }
 `
 
 function Header() {
   const [postClass, setPostClass] = useState(true)
+  const [search, setSearch] = useState(true)
+  const [searchClass, setSearchClass] = useState('')
   const history = useLocation()
 
   useEffect(() => {
-    if (history.pathname.includes('/post')) {
+    if (history.pathname.includes('/post') && !history.pathname.includes('/category')) {
       setPostClass(false)
     } else {
       setPostClass(true)
     }
   }, [history])
 
+  const handleSearch = () => {
+    setSearch(!search)
+    if (search) setSearchClass('')
+    else setSearchClass('on')
+  }
+
   return (
     <HeaderWrapper>
       <HeaderInner container alignItems="center">
         <article>
           <Link to="/" className="blog-title">
-            phrygia react blog
+            <Apps />
           </Link>
           <ul>
-            <li>
-              <SearchInput />
+            <li className={`sch_box ${searchClass}`}>
+              <Search className="icon" style={{ cursor: 'pointer', fontSize: '1.6rem' }} onClick={handleSearch} />
+              <SearchInput in={search} />
             </li>
             <li>
               <a href="https://github.com/phrygia" target="_blank" rel="noreferrer">
-                <GitHub />
+                <GitHub style={{ fontSize: '1.2rem' }} />
               </a>
             </li>
             <li>
               <a href="mailto:dmsgp62@gmail.com">
-                <Drafts />
+                <Drafts style={{ fontSize: '1.4rem' }} />
               </a>
-            </li>
-            <li>
-              <Link to="/">
-                <Home />
-              </Link>
             </li>
           </ul>
         </article>
         {postClass && (
           <article className="he_text">
-            <h1>Ghost & Gatsby</h1>
-            <p>Thoughts, stories and JAMstack</p>
+            <h1>Phrygia React Blog</h1>
+            <p>Thoughts, stories and Tech</p>
           </article>
         )}
         <article>

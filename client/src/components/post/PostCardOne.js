@@ -21,9 +21,8 @@ const Ul = styled.ul`
     }
   }
   @media ${(props) => props.theme.pc} {
-    max-width: 1120px;
-    padding: 0 4vw;
-    grid-gap: 30px;
+    max-width: 1020px;
+    grid-gap: 40px 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
@@ -44,6 +43,23 @@ const Ul = styled.ul`
     }
   }
   @media ${(props) => props.theme.mo} {
+    li {
+      .post_card_image {
+        height: 170px;
+      }
+      .post_card_title {
+        margin: 15px 0 8px;
+        font-size: 17px;
+        line-height: 1.3;
+      }
+      .post_card_excerpt {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      &:not(:last-child) {
+        margin-bottom: 30px;
+      }
+    }
   }
 `
 
@@ -54,7 +70,7 @@ function PostCardOne({ posts }) {
       {Array.isArray(posts)
         ? posts.map(({ _id, title, fileUrl, contents, category, date, views }, index) => {
             const url = extension.find((val) => {
-              if (fileUrl.split('https://phrygiablog')[1].indexOf(val) !== -1) return val
+              if (fileUrl.split('http')[1].indexOf(val) !== -1) return val
             })
             const imgUrl = fileUrl ? fileUrl.split(url)[0] + url : noImg
 
@@ -68,8 +84,11 @@ function PostCardOne({ posts }) {
                   </p>
                   <div className="post_card_footer">
                     {/* <span>{category}</span> */}
-                    <span>{date.substring(0, 10)}</span>
-                    <span>{views}</span>
+                    <span>
+                      {date.substring(0, 10)}
+                      {/* {date} */}
+                    </span>
+                    {/* <span>{views}</span> */}
                   </div>
                 </Link>
               </li>

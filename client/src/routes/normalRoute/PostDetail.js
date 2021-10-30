@@ -12,6 +12,10 @@ import { editorConfiguration } from '../../components/editor/EditorConfig'
 import Comments from '../../components/comments/Comments'
 
 const Button = styled.button``
+const Content = styled.article`
+  line-height: 1.8;
+`
+const CommentBox = styled.article``
 
 function PostDetail(req) {
   const dispatch = useDispatch()
@@ -77,16 +81,18 @@ function PostDetail(req) {
     <section>
       {userId === creatorId ? EditButton : HomeButton}
       <article className="post-header">
-        <h1>{postDetail.category.category_name}</h1>
-        <p>{postDetail.date.substring(0, 10)}</p>
+        <p>
+          {postDetail.category.category_name} {postDetail.date.substring(0, 10)}
+        </p>
+        <h2>{postDetail.title}</h2>
       </article>
       {postDetail && postDetail.comments ? (
         <>
-          <article className="post-content">
+          <Content>
             <CKEditor editor={BalloonEditor} data={postDetail.contents} config={editorConfiguration} disabled="true" />
-          </article>
+          </Content>
           <span>{postDetail.views}</span>
-          <article className="post-comments">
+          <CommentBox>
             {Array.isArray(comments)
               ? comments.map(
                   ({ contents, creator, date, _id, creator_name }, index) =>
@@ -101,7 +107,7 @@ function PostDetail(req) {
                 )
               : 'creator'}
             <Comments id={req.match.params.id} user={userId} userName={userName} />
-          </article>
+          </CommentBox>
         </>
       ) : (
         <h1>Hi</h1>

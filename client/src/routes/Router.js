@@ -16,12 +16,12 @@ import Profile from './normalRoute/Profile'
 
 const PostContainer = styled(Container)`
   @media ${(props) => props.theme.pc} {
-    width: 80% !important;
+    width: 100% !important;
     max-width: 1020px !important;
-    padding: 63px 0 0 !important;
+    padding: 90px 0 0 !important;
   }
   @media ${(props) => props.theme.mo} {
-    padding-top: 91px;
+    padding-top: 20px;
   }
 `
 

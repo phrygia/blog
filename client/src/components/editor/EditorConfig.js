@@ -5,6 +5,7 @@ import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic'
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline'
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough'
 import Code from '@ckeditor/ckeditor5-basic-styles/src/code'
+import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock'
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote'
 import Link from '@ckeditor/ckeditor5-link/src/link'
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed'
@@ -59,6 +60,7 @@ export const editorConfiguration = {
     Table,
     TableToolbar,
     TextTransformation,
+    CodeBlock,
   ],
 
   toolbar: [
@@ -88,7 +90,27 @@ export const editorConfiguration = {
     '|',
     'undo',
     'redo',
+    'codeBlock',
   ],
+
+  codeBlock: {
+    languages: [
+      { language: 'plaintext', label: 'Plain text' },
+      { language: 'c', label: 'C' },
+      { language: 'cs', label: 'C#' },
+      { language: 'cpp', label: 'C++' },
+      { language: 'css', label: 'CSS' },
+      { language: 'diff', label: 'Diff' },
+      { language: 'html', label: 'HTML' },
+      { language: 'java', label: 'Java' },
+      { language: 'javascript', label: 'JavaScript' },
+      { language: 'php', label: 'PHP' },
+      { language: 'python', label: 'Python' },
+      { language: 'ruby', label: 'Ruby' },
+      { language: 'typescript', label: 'TypeScript' },
+      { language: 'xml', label: 'XML' },
+    ],
+  },
 
   heading: {
     options: [
