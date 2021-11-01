@@ -16,8 +16,6 @@ function Member() {
     })
   }, [dispatch])
 
-  // const addPostLink = () => {}
-
   const authLink = (
     <>
       {userRole === 'Admin' ? (
@@ -51,7 +49,9 @@ function Member() {
 
   return (
     <>
-      <Link to="/">Home</Link>
+      <Link to="/" className="mo">
+        Home
+      </Link>
       <button>About</button>
       {isAuthenticated ? <>{authLink}</> : <>{guestLink}</>}
     </>

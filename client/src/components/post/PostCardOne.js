@@ -19,10 +19,18 @@ const Ul = styled.ul`
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+    .post_card_footer {
+      color: #7b7b7b;
+    }
+    &:hover {
+      .post_card_title {
+        color: #26a8ed;
+      }
+    }
   }
   @media ${(props) => props.theme.pc} {
     max-width: 1020px;
-    grid-gap: 40px 30px;
+    grid-gap: 35px 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
@@ -31,14 +39,17 @@ const Ul = styled.ul`
         height: 250px;
       }
       .post_card_title {
-        margin: 15px 0 10px;
+        margin: 20px 0 13px;
         font-size: 20px;
         line-height: 1.15;
       }
       .post_card_excerpt {
-        margin-bottom: 10px;
+        margin-bottom: 14px;
         font-size: 16px;
         line-height: 1.4;
+      }
+      .post_card_footer {
+        font-size: 15px;
       }
     }
   }

@@ -183,13 +183,12 @@ input:-ms-input-placeholder {
 
 #go-to-top {
   position: fixed;
-  width: 48px;
   right: 50px;
-  height: 80px;
-  bottom: 8%;
+  bottom: 7%;
   margin: 0;
   padding: 0;
   z-index: 10000;
+  transform: rotate(180deg);
   opacity: 0;
   color: #323232;
   border: 0;
@@ -202,58 +201,16 @@ input:-ms-input-placeholder {
   &.on {
     opacity: 1;
   }
-  &:hover {
-    span {
-      top: -9px;
-      height: 2px;
-      width: 60%;
-      &.left {
-        -webkot-transform: rotate(-45deg);
-        transform: rotate(-45deg);
-      }
-      &.right {
-        -webkit-transform: rotate(45deg);
-        transform: rotate(45deg);
-      }
-    }
-  }
-  span {
-    background-color: #323232;
-    display: inline-block;
-    width: 50%;
-    height: 1px;
-    position: absolute;
-    top: 0;
-    cursor: pointer;
-    -webkit-transition: all 0.2s cubic-bezier(0.23, 0.24, 0, 0.99);
-    transition: all 0.2s cubic-bezier(0.23, 0.24, 0, 0.99);
-    &.left {
-      left: 0;
-    }
-    &.right {
-      right: 0;
-    }
-  }
-  p {
-    position: absolute;
-    top: 30px;
-    width: 80px;
-    margin: 0;
-    padding-bottom: 32px;
-    -webkit-transform: rotate(270deg);
-    transform: rotate(270deg);
+  svg {
+    font-size: 50px;
   }
 }
 @media (max-width: 767px) {
   #go-to-top {
     right: 11px;
-    -webkit-transform: scale(0.8);
-    transform: scale(0.8);
-    span {
-      height: 1.5px;
-    }
-    p {
-      padding-bottom: 36px;
+    bottom: 5%;
+    svg {
+      font-size: 40px;
     }
   }
 }
@@ -284,4 +241,9 @@ section.route-section {
   width: 100%;
   top: 0;
   left: 0;
+}
+
+.ck.ck-editor__editable_inline {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }

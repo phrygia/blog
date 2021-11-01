@@ -51,7 +51,7 @@ function Profile() {
       <div>
         <div>
           <div>
-            <strong>Edit Password</strong>
+            <strong>비밀번호 수정하기</strong>
           </div>
           <div>
             <form onSubmit={onSubmit}>
@@ -81,8 +81,8 @@ function Profile() {
                 />
                 {errorMsg ? <Alert severity="error">{errorMsg}</Alert> : ''}
               </div>
-              <button color="success" className="mt-4 mb-4 col-md-3 offset-9">
-                제출하기
+              <button color="success" className="">
+                수정하기
               </button>
               {successMsg ? <Alert severity="success">{successMsg}</Alert> : ''}
             </form>

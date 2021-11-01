@@ -64,7 +64,7 @@ router.get('/skip/:skip', async (req, res) => {
     res.json(result)
   } catch (e) {
     console.log(e)
-    res.json({ msg: '더 이상 포스트가 없습니다.' })
+    res.json({ msg: '더 이상의 포스트가 없습니다.' })
   }
 })
 

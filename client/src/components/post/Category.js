@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Ul = styled.ul`
-  margin-bottom: 30px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -11,19 +10,21 @@ const Ul = styled.ul`
     border-radius: 5px;
     font-weight: 500;
     transition: all 0.2s ease;
+    word-break: keep-all;
     a {
       display: inline-block;
       color: #6e6d7a;
       text-transform: uppercase;
     }
     &:hover {
-      background-color: #f1f1f1;
+      background-color: rgba(38, 168, 237, 0.2);
       a {
         color: #111;
       }
     }
   }
   @media ${(props) => props.theme.pc} {
+    margin-bottom: 40px;
     li {
       font-size: 15px;
       a {
@@ -32,8 +33,13 @@ const Ul = styled.ul`
     }
   }
   @media ${(props) => props.theme.mo} {
+    margin: 32px 0 25px;
     li {
-      font-size: 14px;
+      font-size: 13px;
+
+      a {
+        padding: 3px 6px;
+      }
     }
   }
 `

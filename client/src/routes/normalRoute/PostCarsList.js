@@ -5,7 +5,29 @@ import { Helmet } from 'react-helmet'
 import { GrowingSpinner } from '../../components/Spinner'
 import PostCardOne from '../../components/post/PostCardOne'
 import Category from '../../components/post/Category'
-import { Alert } from '@material-ui/lab'
+import styled from 'styled-components'
+import { Error } from '@material-ui/icons'
+
+const Alert = styled.div`
+  text-align: center;
+  font-weight: 700;
+  color: #3c484e;
+  &.more {
+    padding-top: 0;
+  }
+  svg {
+    position: relative;
+    top: 6px;
+    margin-right: 5px;
+  }
+  @media ${(props) => props.theme.pc} {
+    padding: 45px 0 0;
+  }
+  @media ${(props) => props.theme.mo} {
+    padding: 20px 0;
+    font-size: 15px;
+  }
+`
 
 function PostCarsList() {
   const { posts, categoryFindResult, loading, postCount } = useSelector((state) => state.post)
@@ -74,11 +96,11 @@ function PostCarsList() {
       <Category posts={categoryFindResult} />
       {posts ? <PostCardOne posts={posts} /> : GrowingSpinner}
 
-      <div ref={lastPostElementRef}>{loading && GrowingSpinner}</div>
+      <Alert ref={lastPostElementRef}>{loading && GrowingSpinner}</Alert>
       {loading ? null : endMsg ? (
-        <div>
-          <Alert severity="error">더 이상의 포스트는 없습니다</Alert>
-        </div>
+        <Alert className="more">
+          <Error />더 이상의 포스트가 없습니다.
+        </Alert>
       ) : (
         ''
       )}

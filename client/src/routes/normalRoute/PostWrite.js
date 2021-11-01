@@ -9,28 +9,36 @@ import styled from 'styled-components'
 import { POST_UPLOADING_REQUEST } from '../../redux/types'
 
 const Form = styled.form`
-  #title {
-    margin-bottom: 10px;
-  }
-  #category {
-    margin-top: 10px;
+  & > div {
+    margin-bottom: 15px;
   }
   .label-content {
     display: block;
-    margin: 20px 0 10px;
+    margin: 10px 0;
     font-weight: 700;
   }
   .ck-content {
-    height: 600px;
+    height: 550px;
   }
 `
 
 const Button = styled.button`
   display: block;
-  margin: 20px auto;
+  margin: 30px auto;
   border: 0;
-  width: 120px;
-  height: 40px;
+  background-color: #15171a;
+  color: #fff;
+
+  @media ${(props) => props.theme.pc} {
+    width: 140px;
+    height: 44px;
+    font-size: 14px;
+  }
+  @media ${(props) => props.theme.mo} {
+    width: 120px;
+    height: 40px;
+    font-size: 13px;
+  }
 `
 
 function PostWrite() {

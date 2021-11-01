@@ -6,19 +6,36 @@ import { CATEGORY_FIND_REQUEST } from '../../redux/types'
 import styled from 'styled-components'
 
 const Title = styled.div`
-  margin-bottom: 50px;
   text-align: center;
   h2 {
     display: inline-block;
     padding-bottom: 7px;
-    margin-bottom: 15px;
     border-bottom: 3px solid #000;
   }
   strong {
     display: block;
     padding-bottom: 10px;
-    font-size: 18px;
     font-weight: 500;
+  }
+  @media ${(props) => props.theme.pc} {
+    margin-bottom: 50px;
+    h2 {
+      margin-bottom: 15px;
+    }
+    strong {
+      font-size: 18px;
+    }
+  }
+  @media ${(props) => props.theme.mo} {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    strong {
+      font-size: 15px;
+    }
   }
 `
 

@@ -21,7 +21,7 @@ const PostContainer = styled(Container)`
     padding: 90px 0 0 !important;
   }
   @media ${(props) => props.theme.mo} {
-    padding-top: 20px;
+    padding: 0 15px !important;
   }
 `
 

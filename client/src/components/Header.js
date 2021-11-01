@@ -3,15 +3,14 @@ import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Member from './Member'
 import SearchInput from './search/SearchInput'
-import { GitHub, Drafts, Apps, Search } from '@material-ui/icons'
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import { GitHub, Drafts, LibraryBooks, Search } from '@material-ui/icons'
 import bg from '../assets/img/bg.jpg'
 import profile from '../assets/img/cy2.png'
 
 const HeaderWrapper = styled.header`
   width: 100%;
   font-family: 'Lato', sans-serif;
-  background: url(${bg}) no-repeat fixed center 0/ 100% auto;
+  background: url(${bg}) no-repeat fixed center 0 / cover;
 
   @media ${(props) => props.theme.pc} {
     padding: 20px 0 30px;
@@ -33,17 +32,24 @@ const HeaderInner = styled.section`
       justify-content: space-between;
       flex-wrap: wrap;
     }
+    &.he_text {
+      p {
+        opacity: 0.7;
+        font-weight: 400;
+      }
+    }
+    &.nav_wrapper {
+      margin-top: 30px;
+    }
     & > ul {
       display: flex;
       li {
-        margin-left: 15px;
         &.sch_box {
           position: relative;
           top: -2px;
           display: flex;
           .icon {
             position: absolute;
-            left: 100%;
             transition: all 0.2s ease;
             z-index: 3;
           }
@@ -69,7 +75,7 @@ const HeaderInner = styled.section`
         background-color: transparent;
         outline: none;
         display: inline-block;
-        opacity: 0.6;
+        opacity: 0.77;
         transition: all 0.2s ease-out;
         color: #fff;
         &:hover {
@@ -84,17 +90,24 @@ const HeaderInner = styled.section`
     padding: 0 4vw;
     article {
       &.he_text {
-        height: 320px;
+        height: 290px;
         text-align: center;
         h1 {
           padding: 95px 0 5px;
           font-size: 40px;
         }
         p {
-          display: block;
           font-size: 24px;
-          opacity: 0.7;
-          font-weight: 400;
+        }
+      }
+      & > ul {
+        li {
+          margin-left: 20px;
+          &.sch_box {
+            .icon {
+              left: calc(100% - 23px);
+            }
+          }
         }
       }
       .blog-title {
@@ -114,12 +127,44 @@ const HeaderInner = styled.section`
   }
 
   @media ${(props) => props.theme.mo} {
-    width: 90%;
+    padding: 20px 15px;
     margin-bottom: 18px;
     text-align: center;
     article {
+      &.he_text {
+        padding: 35px 0 20px;
+        h1 {
+          padding-bottom: 3px;
+          font-size: 23px;
+        }
+        p {
+          font-size: 15px;
+        }
+      }
+      & > ul {
+        li {
+          margin-left: 12px;
+          &.sch_box {
+            .icon {
+              left: calc(100% - 23px);
+            }
+          }
+        }
+      }
       .blog-title {
         font-size: 20px;
+      }
+      nav {
+        width: 100%;
+        justify-content: center;
+        font-size: 13px;
+        & > * {
+          margin: 0 8px;
+        }
+      }
+      .adm_img,
+      .mo {
+        display: none;
       }
     }
   }
@@ -127,7 +172,7 @@ const HeaderInner = styled.section`
 
 function Header() {
   const [postClass, setPostClass] = useState(true)
-  const [search, setSearch] = useState(true)
+  const [search, setSearch] = useState(false)
   const [searchClass, setSearchClass] = useState('')
   const history = useLocation()
 
@@ -150,7 +195,7 @@ function Header() {
       <HeaderInner container alignItems="center">
         <article>
           <Link to="/" className="blog-title">
-            <Apps />
+            <LibraryBooks />
           </Link>
           <ul>
             <li className={`sch_box ${searchClass}`}>
@@ -175,11 +220,11 @@ function Header() {
             <p>Thoughts, stories and Tech</p>
           </article>
         )}
-        <article>
+        <article className="nav_wrapper">
           <nav>
             <Member />
           </nav>
-          <img src={profile} alt="" />
+          <img src={profile} className="adm_img" alt="admin_img" />
         </article>
       </HeaderInner>
     </HeaderWrapper>
