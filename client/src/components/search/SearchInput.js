@@ -25,8 +25,8 @@ const Form = styled.div`
     position: absolute;
     right: 0%;
     height: 28px;
-    border: 0;
-    background-color: #15171a;
+    border: 1px solid #fff;
+    background-color: transparent;
     color: #fff;
   }
   &:after {

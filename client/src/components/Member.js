@@ -52,7 +52,13 @@ function Member() {
       <Link to="/" className="mo">
         Home
       </Link>
-      <button>About</button>
+      <button
+        onClick={() =>
+          window.open('https://evanescent-dog-4c8.notion.site/phrygia-80b52376264e4ad98e08cde0c4b61a40', '_blank')
+        }
+      >
+        About
+      </button>
       {isAuthenticated ? <>{authLink}</> : <>{guestLink}</>}
     </>
   )
