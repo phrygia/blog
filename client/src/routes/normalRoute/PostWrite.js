@@ -20,6 +20,12 @@ const Form = styled.form`
   .ck-content {
     height: 550px;
   }
+  @media ${(props) => props.theme.mo} {
+    padding-top: 10px;
+    .MuiInputLabel-animated {
+      font-size: 15px;
+    }
+  }
 `
 
 const Button = styled.button`
@@ -70,13 +76,10 @@ function PostWrite() {
   }
 
   const getDataFromChEditor = (e, editor) => {
-    console.log('editor')
     const data = editor.getData()
-    console.log(data)
 
     if (data && data.match('<img src=')) {
       const whereImg_start = data.indexOf('<img src=')
-      console.log(whereImg_start)
       let whereImg_end = ''
       let ext_name_find = ''
       let result_img_url = ''

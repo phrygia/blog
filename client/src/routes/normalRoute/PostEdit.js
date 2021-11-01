@@ -10,28 +10,51 @@ import styled from 'styled-components'
 import { POST_EDIT_UPLOADING_REQUEST } from '../../redux/types'
 
 const Form = styled.form`
-  #title {
-    margin-bottom: 10px;
-  }
-  #category {
-    margin-top: 10px;
-  }
-  .label-content {
-    display: block;
-    margin: 20px 0 10px;
-    font-weight: 700;
-  }
   .ck-content {
     height: 600px;
   }
+  & > div {
+    margin-bottom: 15px;
+  }
+  .label-content {
+    display: block;
+    margin: 10px 0;
+    font-weight: 700;
+  }
+  .ck-content {
+    height: 550px;
+  }
+  @media ${(props) => props.theme.mo} {
+    padding-top: 10px;
+    .MuiInputLabel-animated {
+      font-size: 15px;
+    }
+  }
 `
 
-const Button = styled.button`
-  display: block;
-  margin: 20px auto;
-  border: 0;
-  width: 120px;
-  height: 40px;
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: center;
+  button {
+    margin: 30px 10px 10px;
+    border: 0;
+    background-color: #15171a;
+    color: #fff;
+  }
+  @media ${(props) => props.theme.pc} {
+    button {
+      width: 140px;
+      height: 44px;
+      font-size: 14px;
+    }
+  }
+  @media ${(props) => props.theme.mo} {
+    button {
+      width: 120px;
+      height: 40px;
+      font-size: 13px;
+    }
+  }
 `
 
 function PostEdit() {
@@ -150,10 +173,12 @@ function PostEdit() {
               onReady={Myinit}
               onBlur={getDataFromChEditor}
             />
-            <Button type="submit">수정하기</Button>
-            <Button type="button" onClick={cancel}>
-              취소하기
-            </Button>
+            <ButtonBox>
+              <button type="submit">수정하기</button>
+              <button type="button" onClick={cancel}>
+                취소하기
+              </button>
+            </ButtonBox>
           </Form>
         </div>
       ) : (
