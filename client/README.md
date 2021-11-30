@@ -1,70 +1,99 @@
-# Getting Started with Create React App
+# react-blog (MERN stack)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🛠 사용기술
 
-## Available Scripts
+- React (CRA)
+- 스타일링 : material-ui + styled-components
+- 상태관리 : redux + redux-saga
 
-In the project directory, you can run:
+## 🔨 Redux, Redux-saga
 
-### `yarn start`
+```js
+import { createStore, compose, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware } from 'connected-react-router'
+import createRootReducer from './redux/reducers/index'
+import rootSaga from './redux/sagas'
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+export const history = createBrowserHistory()
+const sagaMiddleware = createSagaMiddleware()
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+const initialState = {}
 
-### `yarn test`
+const middlewares = [sagaMiddleware, routerMiddleware(history)]
+const devtools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const composeEnhancer = process.env.NODE_ENV === 'production' ? compose : devtools || compose
 
-### `yarn build`
+const store = createStore(createRootReducer(history), initialState, composeEnhancer(applyMiddleware(...middlewares)))
+sagaMiddleware.run(rootSaga)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+export default store
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+const App = () => {
+  return (
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <MyRouter />
+      </ConnectedRouter>
+    </Provider>
+  )
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ⛑ Structure
 
-### `yarn eject`
+```
+src
+├── assets
+├────── css
+├────── img
+├────── style
+├── components
+├────── auth
+├────── comments
+├────── editor
+├────── post
+├────── search
+├────── AdminInfo.js
+├────── Footer.js
+├────── Header.js
+├────── Member.js
+├────── Spinner.js
+├── redux
+├────── reducers
+├────── sagas
+├────── types.js
+├── routes
+├────── normalRoute
+├────── protectedRoute
+├────── Router.js
+├── App.js
+├── index.js
+└── store.js
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 📦 Packages
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Main
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [create-react-app](https://github.com/facebook/create-react-app)
+- [react 16.0.1](https://github.com/facebook/react)
+- [react-router 5.2.0](https://github.com/remix-run/react-router)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### styling
 
-## Learn More
+- [material UI](https://github.com/mui-org/material-ui)
+- [styled-components](https://github.com/styled-components/styled-components)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Development Setting
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [eslint](https://github.com/eslint/eslint)
+- [prettier](https://github.com/prettier/prettier))
 
-### Code Splitting
+> [More Details](./pacakge.json)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<div align="center">
+<sub><sup>Project by <a href="https://github.com/phrygia">phrygia</a></sup></sub><small></small>
+</div>
