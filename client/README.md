@@ -1,4 +1,4 @@
-# react-blog (MERN stack)
+# react-blog (client)
 
 ## 🛠 사용기술
 
