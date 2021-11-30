@@ -92,7 +92,7 @@ src
 - [eslint](https://github.com/eslint/eslint)
 - [prettier](https://github.com/prettier/prettier))
 
-> [More Details](./pacakge.json)
+> [More Details](https://github.com/phrygia/react-blog/blob/master/client/package.json)
 
 <div align="center">
 <sub><sup>Project by <a href="https://github.com/phrygia">phrygia</a></sup></sub><small></small>
