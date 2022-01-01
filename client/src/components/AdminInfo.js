@@ -1,6 +1,6 @@
-import React from 'react'
-import Phrygia from '../assets/img/phrygia.jpg'
-import styled from 'styled-components'
+import React from 'react';
+import Phrygia from '../assets/img/phrygia.jpg';
+import styled from 'styled-components';
 
 const PhrygiaInfoBox = styled.div`
   margin-top: 25px;
@@ -30,7 +30,7 @@ const PhrygiaInfoBox = styled.div`
       }
     }
   }
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     dl {
       dt {
         width: 110px;
@@ -50,7 +50,7 @@ const PhrygiaInfoBox = styled.div`
       }
     }
   }
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     dl {
       dt {
         width: 86px;
@@ -70,7 +70,7 @@ const PhrygiaInfoBox = styled.div`
       }
     }
   }
-`
+`;
 
 function AdminInfo() {
   return (
@@ -85,7 +85,7 @@ function AdminInfo() {
         </dd>
       </dl>
     </PhrygiaInfoBox>
-  )
+  );
 }
 
-export default AdminInfo
+export default AdminInfo;

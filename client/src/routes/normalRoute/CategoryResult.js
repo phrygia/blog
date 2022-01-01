@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router'
-import PostCardOne from '../../components/post/PostCardOne'
-import { CATEGORY_FIND_REQUEST } from '../../redux/types'
-import styled from 'styled-components'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
+import PostCardOne from '../../components/post/PostCardOne';
+import { CATEGORY_FIND_REQUEST } from '../../redux/types';
+import styled from 'styled-components';
 
 const Title = styled.div`
   text-align: center;
@@ -17,7 +17,7 @@ const Title = styled.div`
     padding-bottom: 10px;
     font-weight: 500;
   }
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     margin-bottom: 50px;
     h2 {
       margin-bottom: 15px;
@@ -26,7 +26,7 @@ const Title = styled.div`
       font-size: 18px;
     }
   }
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     margin-top: 40px;
     margin-bottom: 30px;
     h2 {
@@ -37,20 +37,22 @@ const Title = styled.div`
       font-size: 15px;
     }
   }
-`
+`;
 
 function CategoryResult() {
-  const { categoryFindResult } = useSelector((state) => state.post)
-  const dispatch = useDispatch()
-  let { category_name } = useParams()
-  const count = categoryFindResult.posts ? categoryFindResult.posts.length : null
+  const { categoryFindResult } = useSelector(state => state.post);
+  const dispatch = useDispatch();
+  let { category_name } = useParams();
+  const count = categoryFindResult.posts
+    ? categoryFindResult.posts.length
+    : null;
 
   useEffect(() => {
     dispatch({
       type: CATEGORY_FIND_REQUEST,
       payload: category_name,
-    })
-  }, [dispatch, category_name, categoryFindResult])
+    });
+  }, [dispatch, category_name, categoryFindResult]);
 
   return (
     <div>
@@ -60,7 +62,7 @@ function CategoryResult() {
       </Title>
       {categoryFindResult && <PostCardOne posts={categoryFindResult.posts} />}
     </div>
-  )
+  );
 }
 
-export default CategoryResult
+export default CategoryResult;

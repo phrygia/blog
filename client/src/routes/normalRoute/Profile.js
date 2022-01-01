@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
-import { Helmet } from 'react-helmet'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { CLEAR_ERROR_REQUEST, PASSWORD_EDIT_UPLOADING_REQUEST } from '../../redux/types'
-import { Alert } from '@material-ui/lab'
-import TextField from '@material-ui/core/TextField'
-import styled from 'styled-components'
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import {
+  CLEAR_ERROR_REQUEST,
+  PASSWORD_EDIT_UPLOADING_REQUEST,
+} from '../../redux/types';
+import { Alert } from '@material-ui/lab';
+import TextField from '@material-ui/core/TextField';
+import styled from 'styled-components';
 
 const FormBox = styled.div`
   h2 {
@@ -24,7 +27,7 @@ const FormBox = styled.div`
     background-color: #26a8ed;
     color: #fff;
   }
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     width: 580px;
     padding: 60px 70px 80px;
     margin: 40px auto;
@@ -41,7 +44,7 @@ const FormBox = styled.div`
       margin-bottom: 20px;
     }
   }
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     h2 {
       margin: 40px 0 30px;
       font-size: 22px;
@@ -56,29 +59,31 @@ const FormBox = styled.div`
       font-size: 13px;
     }
   }
-`
+`;
 
 function Profile() {
-  const { userId, errorMsg, successMsg, previousMatchMsg } = useSelector((state) => state.auth)
+  const { userId, errorMsg, successMsg, previousMatchMsg } = useSelector(
+    state => state.auth,
+  );
 
-  const { userName } = useParams()
+  const { userName } = useParams();
   const [form, setValues] = useState({
     previousPassword: '',
     password: '',
     rePassword: '',
-  })
-  const dispatch = useDispatch()
-  const onChange = (e) => {
+  });
+  const dispatch = useDispatch();
+  const onChange = e => {
     setValues({
       ...form,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
-  const onSubmit = async (e) => {
-    await e.preventDefault()
-    const { previousPassword, password, rePassword } = form
-    const token = localStorage.getItem('token')
+  const onSubmit = async e => {
+    await e.preventDefault();
+    const { previousPassword, password, rePassword } = form;
+    const token = localStorage.getItem('token');
 
     const body = {
       password,
@@ -87,16 +92,16 @@ function Profile() {
       rePassword,
       userId,
       userName,
-    }
+    };
 
     dispatch({
       type: CLEAR_ERROR_REQUEST,
-    })
+    });
     dispatch({
       type: PASSWORD_EDIT_UPLOADING_REQUEST,
       payload: body,
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -122,7 +127,11 @@ function Profile() {
               className="form-control mb-2"
               onChange={onChange}
             /> */}
-            {previousMatchMsg ? <Alert severity="error">{previousMatchMsg}</Alert> : ''}
+            {previousMatchMsg ? (
+              <Alert severity="error">{previousMatchMsg}</Alert>
+            ) : (
+              ''
+            )}
           </div>
           <div>
             <TextField
@@ -164,7 +173,7 @@ function Profile() {
         </form>
       </FormBox>
     </>
-  )
+  );
 }
 
-export default Profile
+export default Profile;

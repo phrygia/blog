@@ -17,7 +17,7 @@ import {
   PASSWORD_EDIT_UPLOADING_REQUEST,
   PASSWORD_EDIT_UPLOADING_SUCCESS,
   PASSWORD_EDIT_UPLOADING_FAILURE,
-} from '../types'
+} from '../types';
 
 const initialState = {
   token: localStorage.getItem('token'),
@@ -30,7 +30,7 @@ const initialState = {
   errorMsg: '',
   successMsg: '',
   previousMatchMsg: '',
-}
+};
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -41,10 +41,10 @@ const authReducer = (state = initialState, action) => {
         ...state,
         errorMsg: '',
         isLoading: true,
-      }
+      };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      localStorage.setItem('token', action.payload.token)
+      localStorage.setItem('token', action.payload.token);
       return {
         ...state,
         ...action.payload,
@@ -53,12 +53,12 @@ const authReducer = (state = initialState, action) => {
         userId: action.payload.user.id,
         userRole: action.payload.user.role,
         errorMsg: '',
-      }
+      };
 
     case REGISTER_FAILURE:
     case LOGIN_FAILURE:
     case LOGOUT_FAILURE:
-      localStorage.removeItem('token')
+      localStorage.removeItem('token');
       return {
         ...state,
         ...action.payload,
@@ -69,9 +69,9 @@ const authReducer = (state = initialState, action) => {
         isLoading: false,
         userRole: null,
         errorMsg: action.payload.data.msg,
-      }
+      };
     case LOGOUT_SUCCESS:
-      localStorage.removeItem('token')
+      localStorage.removeItem('token');
       return {
         token: null,
         user: null,
@@ -80,13 +80,13 @@ const authReducer = (state = initialState, action) => {
         isLoading: false,
         userRole: null,
         errorMsg: '',
-      }
+      };
 
     case USER_LOADING_REQUEST:
       return {
         ...state,
         isLoading: true,
-      }
+      };
     case USER_LOADING_SUCCESS:
       return {
         ...state,
@@ -96,7 +96,7 @@ const authReducer = (state = initialState, action) => {
         userId: action.payload._id,
         userName: action.payload.name,
         userRole: action.payload.role,
-      }
+      };
     case USER_LOADING_FAILURE:
       return {
         ...state,
@@ -104,7 +104,7 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: false,
         isLoading: false,
         userRole: '',
-      }
+      };
     case PASSWORD_EDIT_UPLOADING_REQUEST:
       return {
         ...state,
@@ -113,16 +113,16 @@ const authReducer = (state = initialState, action) => {
         previousMatchMsg: '',
         previousMsg: '',
         successMsg: '',
-      }
+      };
     case PASSWORD_EDIT_UPLOADING_SUCCESS:
-      console.log(action.payload)
+      console.log(action.payload);
       return {
         ...state,
         isLoading: false,
         successMsg: action.payload.success_msg,
         errorMsg: '',
         previousMsg: '',
-      }
+      };
     case PASSWORD_EDIT_UPLOADING_FAILURE:
       return {
         ...state,
@@ -130,27 +130,27 @@ const authReducer = (state = initialState, action) => {
         successMsg: '',
         errorMsg: action.payload.data.fail_msg,
         previousMatchMsg: action.payload.data.match_msg,
-      }
+      };
     case CLEAR_ERROR_REQUEST:
       return {
         ...state,
-      }
+      };
     case CLEAR_ERROR_SUCCESS:
       return {
         ...state,
         errorMsg: '',
         previousMatchMsg: '',
-      }
+      };
     case CLEAR_ERROR_FAILURE:
       return {
         ...state,
         errorMsg: 'Clear Error Fail',
         previousMatchMsg: 'Clear Error Fail',
-      }
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default authReducer
+export default authReducer;

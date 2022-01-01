@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import noImg from '../../assets/img/noImg.jpg'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import noImg from '../../assets/img/noImg.jpg';
 
 const Ul = styled.ul`
   li {
@@ -28,7 +28,7 @@ const Ul = styled.ul`
       }
     }
   }
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     max-width: 1020px;
     grid-gap: 35px 30px;
     display: grid;
@@ -53,7 +53,7 @@ const Ul = styled.ul`
       }
     }
   }
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     li {
       .post_card_image {
         height: 170px;
@@ -72,42 +72,50 @@ const Ul = styled.ul`
       }
     }
   }
-`
+`;
 
 function PostCardOne({ posts }) {
-  const extension = ['.jpeg', '.png', '.jpg']
+  const extension = ['.jpeg', '.png', '.jpg'];
   return (
     <Ul>
       {Array.isArray(posts)
-        ? posts.map(({ _id, title, fileUrl, contents, category, date, views }, index) => {
-            const url = extension.find((val) => {
-              if (fileUrl.split('http')[1].indexOf(val) !== -1) return val
-            })
-            const imgUrl = fileUrl ? fileUrl.split(url)[0] + url : noImg
+        ? posts.map(
+            (
+              { _id, title, fileUrl, contents, category, date, views },
+              index,
+            ) => {
+              const url = extension.find(val => {
+                if (fileUrl.split('http')[1].indexOf(val) !== -1) return val;
+              });
+              const imgUrl = fileUrl ? fileUrl.split(url)[0] + url : noImg;
 
-            return (
-              <li key={_id + index}>
-                <Link to={`/post/${_id}`}>
-                  <div className="post_card_image" style={{ backgroundImage: `url(${imgUrl})` }} />
-                  <h2 className="post_card_title">{title}</h2>
-                  <p className="post_card_excerpt">
-                    {contents.replace(/<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;|&gt;/g, ' ').substring(0, 200)}
-                  </p>
-                  <div className="post_card_footer">
-                    {/* <span>{category}</span> */}
-                    <span>
-                      {date.substring(0, 10)}
-                      {/* {date} */}
-                    </span>
-                    {/* <span>{views}</span> */}
-                  </div>
-                </Link>
-              </li>
-            )
-          })
+              return (
+                <li key={_id + index}>
+                  <Link to={`/post/${_id}`}>
+                    <div
+                      className="post_card_image"
+                      style={{ backgroundImage: `url(${imgUrl})` }}
+                    />
+                    <h2 className="post_card_title">{title}</h2>
+                    <p className="post_card_excerpt">
+                      {contents
+                        .replace(
+                          /<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;|&gt;/g,
+                          ' ',
+                        )
+                        .substring(0, 200)}
+                    </p>
+                    <div className="post_card_footer">
+                      <span>{date.substring(0, 10)}</span>
+                    </div>
+                  </Link>
+                </li>
+              );
+            },
+          )
         : ''}
     </Ul>
-  )
+  );
 }
 
-export default PostCardOne
+export default PostCardOne;

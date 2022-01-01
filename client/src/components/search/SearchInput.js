@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react'
-import { useDispatch } from 'react-redux'
-import { SEARCH_REQUEST } from '../../redux/types'
-import { CSSTransition } from 'react-transition-group'
-import styled from 'styled-components'
+import React, { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { SEARCH_REQUEST } from '../../redux/types';
+import { CSSTransition } from 'react-transition-group';
+import styled from 'styled-components';
 
 const Form = styled.div`
   position: relative;
@@ -36,7 +36,7 @@ const Form = styled.div`
     height: 1px;
     background-color: #fff;
   }
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     &:after {
       left: 28px;
       width: calc(100% - 64px);
@@ -52,7 +52,7 @@ const Form = styled.div`
       font-size: 13px;
     }
   }
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     &:after {
       left: 28px;
       width: calc(100% - 62px);
@@ -68,39 +68,44 @@ const Form = styled.div`
       font-size: 12px;
     }
   }
-`
+`;
 
 function SearchInput({ in: inProp }) {
-  const dispatch = useDispatch()
-  const [form, setForm] = useState({ searchBy: '' })
-  const resetValue = useRef()
+  const dispatch = useDispatch();
+  const [form, setForm] = useState({ searchBy: '' });
+  const resetValue = useRef();
 
   const onChange = () => {
     setForm({
       [resetValue.current.name]: resetValue.current.value,
-    })
-  }
+    });
+  };
 
-  const onSubmit = async (e) => {
-    await e.preventDefault()
-    const { searchBy } = form
-    if (searchBy.length === 0) return alert('검색어를 입력해주세요.')
+  const onSubmit = async e => {
+    await e.preventDefault();
+    const { searchBy } = form;
+    if (searchBy.length === 0) return alert('검색어를 입력해주세요.');
 
     dispatch({
       type: SEARCH_REQUEST,
       payload: searchBy,
-    })
-    // resetValue.current.value = ''
-  }
+    });
+  };
 
   return (
-    <CSSTransition in={inProp} timeout={400} unmountOnExit appear classNames="fade">
+    <CSSTransition
+      in={inProp}
+      timeout={400}
+      unmountOnExit
+      appear
+      classNames="fade"
+    >
       <Form>
         <input name="searchBy" onChange={onChange} ref={resetValue} />
         <button onClick={onSubmit}>검색</button>
       </Form>
     </CSSTransition>
-  )
+  );
 }
 
-export default SearchInput
+export default SearchInput;

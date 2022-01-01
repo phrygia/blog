@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { Helmet } from 'react-helmet'
-import { POST_DELETE_REQUEST, POST_DETAIL_LOADING_REQUEST, USER_LOADING_REQUEST } from '../../redux/types'
-import { CKEditor } from '@ckeditor/ckeditor5-react'
-import styled from 'styled-components'
-import { GrowingSpinner } from '../../components/Spinner'
-import BalloonEditor from '@ckeditor/ckeditor5-editor-balloon/src/ballooneditor'
-import { editorConfiguration } from '../../components/editor/EditorConfig'
-import Comments from '../../components/comments/Comments'
+import React, { useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Helmet } from 'react-helmet';
+import {
+  POST_DELETE_REQUEST,
+  POST_DETAIL_LOADING_REQUEST,
+  USER_LOADING_REQUEST,
+} from '../../redux/types';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import styled from 'styled-components';
+import { GrowingSpinner } from '../../components/Spinner';
+import BalloonEditor from '@ckeditor/ckeditor5-editor-balloon/src/ballooneditor';
+import { editorConfiguration } from '../../components/editor/EditorConfig';
+import Comments from '../../components/comments/Comments';
 
 const Ul = styled.ul`
   display: flex;
@@ -28,20 +32,20 @@ const Ul = styled.ul`
       }
     }
   }
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     li {
       margin: 0 8px;
     }
   }
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     padding-top: 5px;
     li {
       margin: 0 5px;
       font-size: 13px;
     }
   }
-`
-const Button = styled.button``
+`;
+const Button = styled.button``;
 const PostDetailWrapper = styled.section`
   .post-header {
     border-top: solid 4px #313131;
@@ -55,7 +59,7 @@ const PostDetailWrapper = styled.section`
     p {
       color: #7b7b7b;
     }
-    @media ${(props) => props.theme.pc} {
+    @media ${props => props.theme.pc} {
       padding: 20px 2px;
       margin-bottom: 40px;
       span {
@@ -68,7 +72,7 @@ const PostDetailWrapper = styled.section`
         font-size: 14px;
       }
     }
-    @media ${(props) => props.theme.mo} {
+    @media ${props => props.theme.mo} {
       padding: 15px 0;
       margin-bottom: 15px;
       span {
@@ -83,10 +87,10 @@ const PostDetailWrapper = styled.section`
       }
     }
   }
-`
+`;
 const Content = styled.article`
   line-height: 1.8;
-`
+`;
 const CommentBox = styled.article`
   margin-top: 48px;
   .reply_tit {
@@ -116,7 +120,7 @@ const CommentBox = styled.article`
       line-height: 1.6;
     }
   }
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     .reply_tit {
       margin-bottom: 35px;
       padding-bottom: 20px;
@@ -134,7 +138,7 @@ const CommentBox = styled.article`
       font-size: 15px;
     }
   }
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     .reply_tit {
       margin-bottom: 15px;
       padding-bottom: 10px;
@@ -152,28 +156,30 @@ const CommentBox = styled.article`
       font-size: 14px;
     }
   }
-`
+`;
 
 function PostDetail(req) {
-  const dispatch = useDispatch()
-  const { postDetail, creatorId, title, loading } = useSelector((state) => state.post)
-  const { userId, userName } = useSelector((state) => state.auth)
-  const { comments } = useSelector((state) => state.comment)
-  const history = useHistory()
+  const dispatch = useDispatch();
+  const { postDetail, creatorId, title, loading } = useSelector(
+    state => state.post,
+  );
+  const { userId, userName } = useSelector(state => state.auth);
+  const { comments } = useSelector(state => state.comment);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch({
       type: POST_DETAIL_LOADING_REQUEST,
       payload: req.match.params.id,
-    })
+    });
     dispatch({
       type: USER_LOADING_REQUEST,
       payload: localStorage.getItem('token'),
-    })
-  }, [dispatch, req.match.params.id])
+    });
+  }, [dispatch, req.match.params.id]);
 
   const onDeleteClick = () => {
-    const confirm_test = window.confirm('정말 삭제할래요?')
+    const confirm_test = window.confirm('정말 삭제할래요?');
 
     if (confirm_test) {
       dispatch({
@@ -182,10 +188,10 @@ function PostDetail(req) {
           id: req.match.params.id,
           token: localStorage.getItem('token'),
         },
-      })
-      history.push('/')
-    } else return
-  }
+      });
+      history.push('/');
+    } else return;
+  };
 
   const EditButton = (
     <>
@@ -201,7 +207,7 @@ function PostDetail(req) {
         </li>
       </Ul>
     </>
-  )
+  );
 
   const HomeButton = (
     <>
@@ -211,7 +217,7 @@ function PostDetail(req) {
         </li>
       </Ul>
     </>
-  )
+  );
 
   const Body = postDetail && (
     <PostDetailWrapper>
@@ -224,7 +230,12 @@ function PostDetail(req) {
       {postDetail && postDetail.comments ? (
         <>
           <Content>
-            <CKEditor editor={BalloonEditor} data={postDetail.contents} config={editorConfiguration} disabled="true" />
+            <CKEditor
+              editor={BalloonEditor}
+              data={postDetail.contents}
+              config={editorConfiguration}
+              disabled="true"
+            />
           </Content>
           <CommentBox>
             <p className="reply_tit">
@@ -241,26 +252,30 @@ function PostDetail(req) {
                         </div>
                         <div className="reply_txt">{contents}</div>
                       </div>
-                    )
+                    ),
                 )
               : 'creator'}
-            <Comments id={req.match.params.id} user={userId} userName={userName} />
+            <Comments
+              id={req.match.params.id}
+              user={userId}
+              userName={userName}
+            />
           </CommentBox>
         </>
       ) : (
         <h1>Hi</h1>
       )}
     </PostDetailWrapper>
-  )
+  );
 
-  console.log(comments)
+  console.log(comments);
 
   return (
     <div>
       <Helmet title={`Post | ${title}`} />
       {loading === true ? GrowingSpinner : Body}
     </div>
-  )
+  );
 }
 
-export default PostDetail
+export default PostDetail;

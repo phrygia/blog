@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { ArrowDropDownCircle } from '@material-ui/icons'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { ArrowDropDownCircle } from '@material-ui/icons';
 
 const FooterWrapper = styled.footer`
   clear: both;
   width: 100%;
   background-color: #15171a;
   color: rgba(255, 255, 255, 0.7);
-`
+`;
 const FooterInner = styled.section`
   max-width: 1020px;
   margin-left: auto;
   margin-right: auto;
 
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     padding: 20px 0 40px;
     margin-top: 5rem;
     p {
       font-size: 13px;
     }
   }
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     padding: 20px 10px 25px;
     margin-top: 40px;
     p {
@@ -28,25 +28,25 @@ const FooterInner = styled.section`
       font-size: 12px;
     }
   }
-`
+`;
 
 function Footer() {
-  const thisYser = new Date().getFullYear()
-  const [classSt, setClassSt] = useState('')
+  const thisYser = new Date().getFullYear();
+  const [classSt, setClassSt] = useState('');
 
   useEffect(() => {
     window.addEventListener('scroll', function () {
       if (this.scrollY > 200) {
-        setClassSt('on')
+        setClassSt('on');
       } else {
-        setClassSt('')
+        setClassSt('');
       }
-    })
-  }, [])
+    });
+  }, []);
 
   const goToTopBtn = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <FooterWrapper>
@@ -59,7 +59,7 @@ function Footer() {
         </button>
       }
     </FooterWrapper>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

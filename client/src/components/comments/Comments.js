@@ -1,7 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { COMMENT_LOADING_REQUEST, COMMENT_UPLOADING_REQUEST } from '../../redux/types'
-import styled from 'styled-components'
+import React, { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  COMMENT_LOADING_REQUEST,
+  COMMENT_UPLOADING_REQUEST,
+} from '../../redux/types';
+import styled from 'styled-components';
 
 const TextArea = styled.textarea`
   width: 100%;
@@ -9,19 +12,19 @@ const TextArea = styled.textarea`
   outline: none;
   border: solid 1px #dadada;
 
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     height: 130px;
     padding: 14px;
     margin-top: 10px;
     font-size: 15px;
     line-height: 1.45;
   }
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     height: 90px;
     padding: 10px;
     font-size: 14px;
   }
-`
+`;
 
 const Button = styled.button`
   float: right;
@@ -29,58 +32,58 @@ const Button = styled.button`
   background-color: #26a8ed;
   color: #fff;
   border: 0;
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     margin: 10px 0 70px;
     font-size: 15px;
   }
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     margin: 10px 0 40px;
     font-size: 14px;
   }
-`
+`;
 
 function Comments({ id, userId, userName }) {
-  const dispatch = useDispatch()
-  const [formValue, setFormValue] = useState({ contents: '' })
-  const resetValue = useRef()
-  const { isAuthenticated } = useSelector((state) => state.auth)
+  const dispatch = useDispatch();
+  const [formValue, setFormValue] = useState({ contents: '' });
+  const resetValue = useRef();
+  const { isAuthenticated } = useSelector(state => state.auth);
 
   useEffect(() => {
     dispatch({
       type: COMMENT_LOADING_REQUEST,
       payload: id,
-    })
-  }, [dispatch, id])
+    });
+  }, [dispatch, id]);
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-    const { contents } = formValue
-    const token = localStorage.getItem('token')
+  const onSubmit = e => {
+    e.preventDefault();
+    const { contents } = formValue;
+    const token = localStorage.getItem('token');
     const body = {
       contents,
       token,
       id,
       userId,
       userName,
-    }
+    };
     dispatch({
       type: COMMENT_UPLOADING_REQUEST,
       payload: body,
-    })
-    resetValue.current.value = ''
-    setFormValue('')
-  }
+    });
+    resetValue.current.value = '';
+    setFormValue('');
+  };
 
-  const onChange = (e) => {
+  const onChange = e => {
     setFormValue({
       ...formValue,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   const memeberCheck = () => {
-    alert('비회원은 댓글을 남기실 수 없습니다 :)')
-  }
+    alert('비회원은 댓글을 남기실 수 없습니다 :)');
+  };
 
   return isAuthenticated ? (
     <>
@@ -98,10 +101,15 @@ function Comments({ id, userId, userName }) {
     </>
   ) : (
     <>
-      <TextArea name="contents" id="contents" value="로그인한 멤버만 댓글을 남기실 수 있습니다 " disabled />
+      <TextArea
+        name="contents"
+        id="contents"
+        value="로그인한 멤버만 댓글을 남기실 수 있습니다 "
+        disabled
+      />
       <Button onClick={memeberCheck}>댓글 남기기</Button>
     </>
-  )
+  );
 }
 
-export default Comments
+export default Comments;

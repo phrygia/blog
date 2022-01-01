@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
-import Member from './Member'
-import SearchInput from './search/SearchInput'
-import { GitHub, Drafts, LibraryBooks, Search } from '@material-ui/icons'
-import bg from '../assets/img/bg.jpg'
-import profile from '../assets/img/cy2.png'
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import Member from './Member';
+import SearchInput from './search/SearchInput';
+import { GitHub, Drafts, LibraryBooks, Search } from '@material-ui/icons';
+import bg from '../assets/img/bg.jpg';
+import profile from '../assets/img/cy2.png';
 
 const HeaderWrapper = styled.header`
   width: 100%;
   font-family: 'Lato', sans-serif;
   background: url(${bg}) no-repeat fixed center 0 / cover;
 
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     padding: 20px 0 30px;
   }
-  @media ${(props) => props.theme.mo} {
-    /* height: 300px; */
-  }
-`
+`;
 const HeaderInner = styled.section`
   margin: 0 auto;
   width: 100%;
@@ -85,7 +82,7 @@ const HeaderInner = styled.section`
     }
   }
 
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     max-width: 1120px;
     padding: 0 4vw;
     article {
@@ -126,7 +123,7 @@ const HeaderInner = styled.section`
     }
   }
 
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     padding: 20px 15px;
     margin-bottom: 18px;
     text-align: center;
@@ -168,27 +165,30 @@ const HeaderInner = styled.section`
       }
     }
   }
-`
+`;
 
 function Header() {
-  const [postClass, setPostClass] = useState(true)
-  const [search, setSearch] = useState(false)
-  const [searchClass, setSearchClass] = useState('')
-  const history = useLocation()
+  const [postClass, setPostClass] = useState(true);
+  const [search, setSearch] = useState(false);
+  const [searchClass, setSearchClass] = useState('');
+  const history = useLocation();
 
   useEffect(() => {
-    if (history.pathname.includes('/post') && !history.pathname.includes('/category')) {
-      setPostClass(false)
+    if (
+      history.pathname.includes('/post') &&
+      !history.pathname.includes('/category')
+    ) {
+      setPostClass(false);
     } else {
-      setPostClass(true)
+      setPostClass(true);
     }
-  }, [history])
+  }, [history]);
 
   const handleSearch = () => {
-    setSearch(!search)
-    if (search) setSearchClass('')
-    else setSearchClass('on')
-  }
+    setSearch(!search);
+    if (search) setSearchClass('');
+    else setSearchClass('on');
+  };
 
   return (
     <HeaderWrapper>
@@ -199,11 +199,19 @@ function Header() {
           </Link>
           <ul>
             <li className={`sch_box ${searchClass}`}>
-              <Search className="icon" style={{ cursor: 'pointer', fontSize: '1.6rem' }} onClick={handleSearch} />
+              <Search
+                className="icon"
+                style={{ cursor: 'pointer', fontSize: '1.6rem' }}
+                onClick={handleSearch}
+              />
               <SearchInput in={search} />
             </li>
             <li>
-              <a href="https://github.com/phrygia" target="_blank" rel="noreferrer">
+              <a
+                href="https://github.com/phrygia"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <GitHub style={{ fontSize: '1.2rem' }} />
               </a>
             </li>
@@ -228,7 +236,7 @@ function Header() {
         </article>
       </HeaderInner>
     </HeaderWrapper>
-  )
+  );
 }
 
-export default Header
+export default Header;

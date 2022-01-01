@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Ul = styled.ul`
   display: flex;
@@ -23,7 +23,7 @@ const Ul = styled.ul`
       }
     }
   }
-  @media ${(props) => props.theme.pc} {
+  @media ${props => props.theme.pc} {
     margin-bottom: 40px;
     li {
       font-size: 15px;
@@ -32,7 +32,7 @@ const Ul = styled.ul`
       }
     }
   }
-  @media ${(props) => props.theme.mo} {
+  @media ${props => props.theme.mo} {
     margin: 32px 0 25px;
     li {
       font-size: 13px;
@@ -42,7 +42,7 @@ const Ul = styled.ul`
       }
     }
   }
-`
+`;
 
 function Category({ posts }) {
   return (
@@ -57,7 +57,7 @@ function Category({ posts }) {
           ))
         : null}
     </Ul>
-  )
+  );
 }
 
-export default Category
+export default Category;
