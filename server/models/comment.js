@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const moment = require('moment')
+const mongoose = require('mongoose');
+const moment = require('moment');
 
 // create Schema
 const CommentSchema = new mongoose.Schema({
@@ -22,8 +22,8 @@ const CommentSchema = new mongoose.Schema({
   creator_name: {
     type: String,
   },
-})
+});
 
-const Comment = mongoose.model('comment', CommentSchema)
+const Comment = mongoose.model('comment', CommentSchema);
 
-module.exports = Comment
+module.exports = Comment;

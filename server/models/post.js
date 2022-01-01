@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const moment = require('moment')
+const mongoose = require('mongoose');
+const moment = require('moment');
 
 // create Schema
 const PostSchema = new mongoose.Schema({
@@ -38,8 +38,8 @@ const PostSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
-})
+});
 
-const Post = mongoose.model('post', PostSchema)
+const Post = mongoose.model('post', PostSchema);
 
-module.exports = Post
+module.exports = Post;

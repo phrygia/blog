@@ -1,8 +1,8 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
 // Model
-const Post = require('../../models/post')
+const Post = require('../../models/post');
 
 router.get('/:search_result', async (req, res, next) => {
   try {
@@ -11,11 +11,11 @@ router.get('/:search_result', async (req, res, next) => {
         $regex: req.params.search_result,
         $options: 'i',
       },
-    })
-    res.send(result)
+    });
+    res.send(result);
   } catch (e) {
-    next(e)
+    next(e);
   }
-})
+});
 
-module.exports = router
+module.exports = router;
