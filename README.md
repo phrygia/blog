@@ -1,12 +1,15 @@
 # react-blog (MERN stack)
+## 개인 프로젝트
+
+![blog](https://user-images.githubusercontent.com/40693181/170808442-3096a202-7d01-46b7-84eb-99cfc2f506af.jpg)
 
 ## 🛠 사용기술
 
 - React (CRA)
 - 스타일링 : material-ui + styled-components
-- DB : Node JS + express + MongoDB
 - 상태관리 : redux + redux-saga
-- aws ec2 배포
+- DB : Node JS + express + MongoDB (인강 참고)
+- aws ec2 배포 (인강 참고)
 
 ## ⛑ Structure
 
